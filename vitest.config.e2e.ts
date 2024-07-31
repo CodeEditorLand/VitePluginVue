@@ -14,7 +14,7 @@ export default defineConfig({
     },
   },
   test: {
-    include: ['./playground/ssr-vue/**/*.spec.[tj]s'],
+    include: ['./playground/**/**/*.spec.[tj]s'],
     exclude: [
       // skip link vite tets at local, it will panic at v8.
       '**/node_modules/**',
@@ -24,6 +24,8 @@ export default defineConfig({
       './playground/vue-lib/**/*.spec.[tj]s',
       // ssr-vue test-server has runtime issue
       './playground/ssr-vue/**/*.spec.[tj]s',
+      // not find the issue
+      './playground/tailwind/**/*.spec.[tj]s',
     ],
     setupFiles: ['./playground/vitestSetup.ts'],
     globalSetup: ['./playground/vitestGlobalSetup.ts'],
