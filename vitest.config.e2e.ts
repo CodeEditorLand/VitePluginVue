@@ -19,9 +19,11 @@ export default defineConfig({
       // skip link vite tets at local, it will panic at v8.
       '**/node_modules/**',
       // need to system format
-      './playground/vue-legacy/**/*.spec.[tj]s' ,
+      './playground/vue-legacy/**/*.spec.[tj]s',
       // need to umd format
-       './playground/vue-lib/**/*.spec.[tj]s',
+      './playground/vue-lib/**/*.spec.[tj]s',
+      // ssr-vue test-server has runtime issue
+      './playground/ssr-vue/**/*.spec.[tj]s',
     ],
     setupFiles: ['./playground/vitestSetup.ts'],
     globalSetup: ['./playground/vitestGlobalSetup.ts'],
