@@ -24,8 +24,6 @@ export default defineConfig({
       './playground/vue-lib/**/*.spec.[tj]s',
       // ssr-vue test-server has runtime issue
       './playground/ssr-vue/**/*.spec.[tj]s',
-      // not find the issue
-      './playground/tailwind/**/*.spec.[tj]s',
     ],
     setupFiles: ['./playground/vitestSetup.ts'],
     globalSetup: ['./playground/vitestGlobalSetup.ts'],
