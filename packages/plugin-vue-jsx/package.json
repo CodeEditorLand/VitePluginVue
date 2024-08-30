@@ -1,6 +1,6 @@
 {
 	"dependencies": {
-		"@babel/plugin-transform-typescript": "7.24.7",
+		"@babel/plugin-transform-typescript": "7.25.2",
 		"@vue/babel-plugin-jsx": "1.2.2"
 	},
 	"devDependencies": {},
