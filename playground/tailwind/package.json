@@ -3,7 +3,7 @@
 		"autoprefixer": "10.4.20"
 	},
 	"devDependencies": {
-		"@types/node": "22.5.2"
+		"@types/node": "22.5.3"
 	},
 	"name": "@vitejs/test-tailwind",
 	"scripts": {
