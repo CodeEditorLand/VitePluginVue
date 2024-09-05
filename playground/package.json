@@ -1,6 +1,6 @@
 {
 	"devDependencies": {
-		"@types/node": "22.5.3",
+		"@types/node": "22.5.4",
 		"convert-source-map": "2.0.0",
 		"css-color-names": "1.0.1",
 		"kill-port": "2.0.1",
