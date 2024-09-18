@@ -1,19 +1,23 @@
 {
-	"dependencies": {
-		"lodash-es": "^4.17.21"
-	},
-	"devDependencies": {
-		"js-yaml": "^4.1.0",
-		"less": "^4.2.0",
-		"pug": "^3.0.3",
-		"sass": "^1.77.5",
-		"stylus": "^0.63.0"
-	},
-	"name": "@vitejs/test-vue",
-	"scripts": {
-		"build": "vite build",
-		"debug": "node --inspect-brk vite",
-		"dev": "vite",
-		"preview": "vite preview"
-	}
+  "name": "@vitejs/test-vue",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "debug": "node --inspect-brk vite",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "lodash-es": "^4.17.21",
+    "vue": "^3.4.29"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "workspace:*",
+    "js-yaml": "^4.1.0",
+    "less": "^4.2.0",
+    "pug": "^3.0.3",
+    "sass": "^1.77.5",
+    "stylus": "^0.63.0"
+  }
 }
