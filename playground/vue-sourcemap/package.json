@@ -1,20 +1,15 @@
 {
-  "name": "@vitejs/test-vue-sourcemap",
-  "private": true,
-  "version": "0.0.0",
-  "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "debug": "node --inspect-brk vite",
-    "preview": "vite preview"
-  },
-  "devDependencies": {
-    "@vitejs/plugin-vue": "workspace:*",
-    "less": "^4.2.0",
-    "postcss-nested": "^6.0.1",
-    "sass": "^1.77.5"
-  },
-  "dependencies": {
-    "vue": "^3.4.29"
-  }
+	"dependencies": {},
+	"devDependencies": {
+		"less": "^4.2.0",
+		"postcss-nested": "^6.0.1",
+		"sass": "^1.77.5"
+	},
+	"name": "@vitejs/test-vue-sourcemap",
+	"scripts": {
+		"build": "vite build",
+		"debug": "node --inspect-brk vite",
+		"dev": "vite",
+		"preview": "vite preview"
+	}
 }
