@@ -1,10 +1,10 @@
 {
 	"devDependencies": {
-		"@jridgewell/gen-mapping": "^0.3.5",
-		"@jridgewell/trace-mapping": "^0.3.25",
-		"debug": "^4.3.5",
-		"slash": "^5.1.0",
-		"source-map-js": "^1.2.0"
+		"@jridgewell/gen-mapping": "0.3.5",
+		"@jridgewell/trace-mapping": "0.3.25",
+		"debug": "4.3.7",
+		"slash": "5.1.0",
+		"source-map-js": "1.2.1"
 	},
 	"exports": {
 		".": {
