@@ -1,11 +1,11 @@
 {
+	"dependencies": {},
+	"devDependencies": {},
 	"name": "@vitejs/test-vue-server-origin",
 	"scripts": {
 		"build": "vite build",
 		"debug": "node --inspect-brk vite",
 		"dev": "vite",
 		"preview": "vite preview"
-	},
-	"dependencies": {},
-	"devDependencies": {}
+	}
 }
