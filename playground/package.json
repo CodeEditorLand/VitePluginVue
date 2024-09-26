@@ -1,7 +1,7 @@
 {
 	"name": "@vitejs/vite-playground",
 	"devDependencies": {
-		"@types/node": "22.6.0",
+		"@types/node": "22.7.2",
 		"convert-source-map": "2.0.0",
 		"css-color-names": "1.0.1",
 		"kill-port": "2.0.1",
