@@ -1,26 +1,26 @@
 {
-	"dependencies": {
-		"@babel/plugin-transform-typescript": "7.25.2",
-		"@vue/babel-plugin-jsx": "1.2.5"
-	},
-	"devDependencies": {},
+	"name": "@vitejs/plugin-vue-jsx",
 	"exports": {
 		".": {
 			"import": "./dist/index.mjs",
 			"require": "./dist/index.cjs"
 		}
 	},
+	"main": "./dist/index.cjs",
+	"module": "./dist/index.mjs",
+	"types": "./dist/index.d.ts",
 	"files": [
 		"dist"
 	],
-	"main": "./dist/index.cjs",
-	"module": "./dist/index.mjs",
-	"name": "@vitejs/plugin-vue-jsx",
 	"scripts": {
 		"build": "unbuild && pnpm run patch-cjs",
 		"dev": "unbuild --stub",
 		"patch-cjs": "tsx ../../scripts/patchCJS.ts",
 		"prepublishOnly": "npm run build"
 	},
-	"types": "./dist/index.d.ts"
+	"dependencies": {
+		"@babel/plugin-transform-typescript": "7.25.2",
+		"@vue/babel-plugin-jsx": "1.2.5"
+	},
+	"devDependencies": {}
 }

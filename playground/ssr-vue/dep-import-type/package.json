@@ -1,4 +1,4 @@
 {
-	"main": "index.js",
-	"name": "@vitejs/test-dep-import-type"
+	"name": "@vitejs/test-dep-import-type",
+	"main": "index.js"
 }
