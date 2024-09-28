@@ -1,4 +1,14 @@
 {
+	"dependencies": {
+		"@vitejs/test-example-external-component": "file:example-external-component",
+		"pinia": "2.2.2"
+	},
+	"devDependencies": {
+		"@vitejs/plugin-vue-jsx": "workspace:*",
+		"@vitejs/test-dep-import-type": "link:dep-import-type",
+		"compression": "1.7.4",
+		"serve-static": "1.16.2"
+	},
 	"name": "@vitejs/test-ssr-vue",
 	"scripts": {
 		"build": "npm run build:client && npm run build:server",
@@ -10,15 +20,5 @@
 		"dev": "node server",
 		"generate": "vite build --ssrManifest .vite/ssr-manifest.json --outDir dist/static && npm run build:server && node prerender",
 		"serve": "NODE_ENV=production node server"
-	},
-	"dependencies": {
-		"@vitejs/test-example-external-component": "file:example-external-component",
-		"pinia": "2.2.2"
-	},
-	"devDependencies": {
-		"@vitejs/plugin-vue-jsx": "workspace:*",
-		"@vitejs/test-dep-import-type": "link:dep-import-type",
-		"compression": "1.7.4",
-		"serve-static": "1.16.2"
 	}
 }
