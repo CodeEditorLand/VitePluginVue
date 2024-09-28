@@ -1,4 +1,5 @@
 {
+	"name": "@vitejs/vite-playground",
 	"devDependencies": {
 		"@types/node": "22.7.3",
 		"convert-source-map": "2.0.0",
@@ -6,6 +7,5 @@
 		"kill-port": "2.0.1",
 		"node-fetch": "3.3.2",
 		"sirv": "2.0.4"
-	},
-	"name": "@vitejs/vite-playground"
+	}
 }
