@@ -1,3 +1,3 @@
 export interface Aliased {
-  id: number
+	id: number;
 }

@@ -1,7 +1,9 @@
-import { createApp } from 'vue'
-// @ts-ignore
-import { CompA } from '../dist/lib/my-vue-lib'
-import '../dist/lib/style.css'
+import { createApp } from "vue";
 
-const app = createApp(CompA)
-app.mount('#app')
+// @ts-ignore
+import { CompA } from "../dist/lib/my-vue-lib";
+
+import "../dist/lib/style.css";
+
+const app = createApp(CompA);
+app.mount("#app");
