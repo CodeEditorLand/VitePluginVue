@@ -1,17 +1,20 @@
 # @vitejs/plugin-vue [![npm](https://img.shields.io/npm/v/@vitejs/plugin-vue.svg)](https://npmjs.com/package/@vitejs/plugin-vue)
 
-> Note: as of `vue` 3.2.13+ and `@vitejs/plugin-vue` 1.9.0+, `@vue/compiler-sfc` is no longer required as a peer dependency.
+> Note: as of `vue` 3.2.13+ and `@vitejs/plugin-vue` 1.9.0+, `@vue/compiler-sfc`
+> is no longer required as a peer dependency.
 
 ```js
 // vite.config.js
-import vue from '@vitejs/plugin-vue'
+import vue from "@vitejs/plugin-vue";
 
 export default {
-  plugins: [vue()],
-}
+	plugins: [vue()],
+};
 ```
 
-For JSX / TSX support, [`@vitejs/plugin-vue-jsx`](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue-jsx) is also needed.
+For JSX / TSX support,
+[`@vitejs/plugin-vue-jsx`](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue-jsx)
+is also needed.
 
 ## Options
 
@@ -125,7 +128,8 @@ export interface Options {
 
 ## Asset URL handling
 
-When `@vitejs/plugin-vue` compiles the `<template>` blocks in SFCs, it also converts any encountered asset URLs into ESM imports.
+When `@vitejs/plugin-vue` compiles the `<template>` blocks in SFCs, it also
+converts any encountered asset URLs into ESM imports.
 
 For example, the following template snippet:
 
@@ -137,13 +141,14 @@ Is the same as:
 
 ```vue
 <script setup>
-import _imports_0 from '../image.png'
+	import _imports_0 from "../image.png";
 </script>
 
 <img :src="_imports_0" />
 ```
 
-By default the following tag/attribute combinations are transformed, and can be configured using the `template.transformAssetUrls` option.
+By default the following tag/attribute combinations are transformed, and can be
+configured using the `template.transformAssetUrls` option.
 
 ```js
 {
@@ -155,7 +160,9 @@ By default the following tag/attribute combinations are transformed, and can be 
 }
 ```
 
-Note that only attribute values that are static strings are transformed. Otherwise, you'd need to import the asset manually, e.g. `import imgUrl from '../image.png'`.
+Note that only attribute values that are static strings are transformed.
+Otherwise, you'd need to import the asset manually, e.g.
+`import imgUrl from '../image.png'`.
 
 ## Example for passing options to `vue/compiler-sfc`:
 
@@ -207,27 +214,29 @@ export default {
 }
 ```
 
-Create a file named `Demo.vue`, add `lang="yaml"` to the `<i18n>` blocks, then you can use the syntax of `YAML`:
+Create a file named `Demo.vue`, add `lang="yaml"` to the `<i18n>` blocks, then
+you can use the syntax of `YAML`:
 
 ```vue
 <template>Hello</template>
 
 <i18n lang="yaml">
-message: 'world'
-fullWord: 'hello world'
+message: "world"
+fullWord: "hello world"
 </i18n>
 ```
 
-`message` is mounted on the i18n property of the component instance, you can use like this:
+`message` is mounted on the i18n property of the component instance, you can use
+like this:
 
 ```vue
-<script setup lang="ts">
-import Demo from 'components/Demo.vue'
+<script lang="ts" setup>
+	import Demo from "components/Demo.vue";
 </script>
 
 <template>
-  <Demo /> {{ Demo.i18n.message }}
-  <div>{{ Demo.i18n.fullWord }}</div>
+	<Demo /> {{ Demo.i18n.message }}
+	<div>{{ Demo.i18n.fullWord }}</div>
 </template>
 ```
 
@@ -235,26 +244,36 @@ import Demo from 'components/Demo.vue'
 
 > Requires `vue@^3.2.0` & `@vitejs/plugin-vue@^1.4.0`
 
-Vue 3.2 introduces the `defineCustomElement` method, which works with SFCs. By default, `<style>` tags inside SFCs are extracted and merged into CSS files during build. However when shipping a library of custom elements, it may be desirable to inline the styles as JavaScript strings and inject them into the custom elements' shadow root instead.
+Vue 3.2 introduces the `defineCustomElement` method, which works with SFCs. By
+default, `<style>` tags inside SFCs are extracted and merged into CSS files
+during build. However when shipping a library of custom elements, it may be
+desirable to inline the styles as JavaScript strings and inject them into the
+custom elements' shadow root instead.
 
-Starting in 1.4.0, files ending with `*.ce.vue` will be compiled in "custom elements" mode: its `<style>` tags are compiled into inlined CSS strings and attached to the component as its `styles` property:
+Starting in 1.4.0, files ending with `*.ce.vue` will be compiled in "custom
+elements" mode: its `<style>` tags are compiled into inlined CSS strings and
+attached to the component as its `styles` property:
 
 ```js
-import { defineCustomElement } from 'vue'
-import Example from './Example.ce.vue'
+import { defineCustomElement } from "vue";
 
-console.log(Example.styles) // ['/* css content */']
+import Example from "./Example.ce.vue";
+
+console.log(Example.styles); // ['/* css content */']
 
 // register
-customElements.define('my-example', defineCustomElement(Example))
+customElements.define("my-example", defineCustomElement(Example));
 ```
 
-Note in custom elements mode there is no need to use `<style scoped>` since the CSS is already scoped inside the shadow DOM.
+Note in custom elements mode there is no need to use `<style scoped>` since the
+CSS is already scoped inside the shadow DOM.
 
 The `customElement` plugin option can be used to configure the behavior:
 
-- `{ customElement: true }` will import all `*.vue` files in custom element mode.
-- Use a string or regex pattern to change how files should be loaded as Custom Elements (this check is applied after `include` and `exclude` matches).
+-   `{ customElement: true }` will import all `*.vue` files in custom element
+    mode.
+-   Use a string or regex pattern to change how files should be loaded as Custom
+    Elements (this check is applied after `include` and `exclude` matches).
 
 ## License
 

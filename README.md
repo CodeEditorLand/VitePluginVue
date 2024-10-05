@@ -14,7 +14,8 @@
 
 # Vite Plugin Vue
 
-See [`@vitejs/plugin-vue` documentation](packages/plugin-vue/README.md) and [`@vitejs/plugin-vue-jsx` documentation](packages/plugin-vue-jsx/README.md)
+See [`@vitejs/plugin-vue` documentation](packages/plugin-vue/README.md) and
+[`@vitejs/plugin-vue-jsx` documentation](packages/plugin-vue-jsx/README.md)
 
 ## Packages
 
