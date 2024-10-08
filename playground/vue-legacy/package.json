@@ -1,13 +1,18 @@
 {
-	"dependencies": {},
-	"devDependencies": {
-		"@vitejs/plugin-legacy": "5.4.2"
-	},
-	"name": "@vitejs/test-vue-legacy",
-	"scripts": {
-		"build": "vite build",
-		"debug": "node --inspect-brk vite",
-		"dev": "vite",
-		"preview": "vite preview"
-	}
+  "name": "@vitejs/test-vue-legacy",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "debug": "node --inspect-brk vite",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "vue": "^3.4.29"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "workspace:*",
+    "@vitejs/plugin-legacy": "^5.4.1"
+  }
 }

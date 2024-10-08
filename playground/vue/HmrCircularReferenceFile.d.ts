@@ -2,7 +2,7 @@
 // which has a circular reference on `TypeScope._ownerScope` (issue 325)
 
 declare namespace App {
-	interface User {
-		name: string;
-	}
+  interface User {
+    name: string
+  }
 }

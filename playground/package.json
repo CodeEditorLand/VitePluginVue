@@ -1,11 +1,13 @@
 {
-	"devDependencies": {
-		"@types/node": "22.7.5",
-		"convert-source-map": "2.0.0",
-		"css-color-names": "1.0.1",
-		"kill-port": "2.0.1",
-		"node-fetch": "3.3.2",
-		"sirv": "2.0.4"
-	},
-	"name": "@vitejs/vite-playground"
+  "name": "@vitejs/vite-playground",
+  "private": true,
+  "version": "1.0.0",
+  "devDependencies": {
+    "@types/node": "^20.14.2",
+    "convert-source-map": "^2.0.0",
+    "css-color-names": "^1.0.1",
+    "kill-port": "^1.6.1",
+    "node-fetch": "^3.3.2",
+    "sirv": "^2.0.4"
+  }
 }
