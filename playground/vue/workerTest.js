@@ -1,1 +1,1 @@
-self.postMessage('worker load!')
+self.postMessage("worker load!");
