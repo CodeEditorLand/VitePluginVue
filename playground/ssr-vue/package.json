@@ -1,13 +1,13 @@
 {
 	"dependencies": {
 		"@vitejs/test-example-external-component": "file:example-external-component",
-		"pinia": "^2.2.4"
+		"pinia": "2.2.4"
 	},
 	"devDependencies": {
 		"@vitejs/plugin-vue-jsx": "workspace:*",
 		"@vitejs/test-dep-import-type": "link:dep-import-type",
-		"compression": "^1.7.4",
-		"serve-static": "^1.16.2"
+		"compression": "1.7.4",
+		"serve-static": "1.16.2"
 	},
 	"name": "@vitejs/test-ssr-vue",
 	"scripts": {

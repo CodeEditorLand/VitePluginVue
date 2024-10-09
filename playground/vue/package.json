@@ -1,13 +1,13 @@
 {
 	"dependencies": {
-		"lodash-es": "^4.17.21"
+		"lodash-es": "4.17.21"
 	},
 	"devDependencies": {
-		"js-yaml": "^4.1.0",
-		"less": "^4.2.0",
-		"pug": "^3.0.3",
-		"sass": "^1.79.4",
-		"stylus": "^0.63.0"
+		"js-yaml": "4.1.0",
+		"less": "4.2.0",
+		"pug": "3.0.3",
+		"sass": "1.79.4",
+		"stylus": "0.63.0"
 	},
 	"name": "@vitejs/test-vue",
 	"scripts": {
