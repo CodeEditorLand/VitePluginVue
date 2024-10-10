@@ -1,15 +1,15 @@
 {
+	"dependencies": {
+		"autoprefixer": "10.4.20"
+	},
+	"devDependencies": {
+		"@types/node": "22.7.5"
+	},
 	"name": "@vitejs/test-tailwind",
 	"scripts": {
 		"build": "vite build",
 		"debug": "node --inspect-brk ../../packages/vite/bin/vite",
 		"dev": "vite",
 		"preview": "vite preview"
-	},
-	"dependencies": {
-		"autoprefixer": "10.4.20"
-	},
-	"devDependencies": {
-		"@types/node": "22.7.5"
 	}
 }
