@@ -5,7 +5,7 @@
 		"css-color-names": "1.0.1",
 		"kill-port": "2.0.1",
 		"node-fetch": "3.3.2",
-		"sirv": "2.0.4"
+		"sirv": "3.0.0"
 	},
 	"name": "@vitejs/vite-playground"
 }
