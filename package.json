@@ -16,7 +16,7 @@
 		"lint-staged": "15.2.10",
 		"npm-run-all2": "6.2.3",
 		"picocolors": "1.1.0",
-		"playwright-chromium": "1.48.0",
+		"playwright-chromium": "1.48.1",
 		"resolve": "1.22.8",
 		"rollup-plugin-license": "3.5.3",
 		"simple-git-hooks": "2.11.1",
