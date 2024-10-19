@@ -3,7 +3,7 @@
 	"devDependencies": {
 		"less": "4.2.0",
 		"postcss-nested": "6.2.0",
-		"sass": "1.80.1"
+		"sass": "1.80.2"
 	},
 	"name": "@vitejs/test-vue-sourcemap",
 	"scripts": {
