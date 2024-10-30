@@ -2,8 +2,8 @@
 	"dependencies": {},
 	"devDependencies": {
 		"less": "4.2.0",
-		"postcss-nested": "6.2.0",
-		"sass": "1.80.4"
+		"postcss-nested": "7.0.0",
+		"sass": "1.80.5"
 	},
 	"name": "@vitejs/test-vue-sourcemap",
 	"scripts": {

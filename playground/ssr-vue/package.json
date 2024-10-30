@@ -1,7 +1,7 @@
 {
 	"dependencies": {
 		"@vitejs/test-example-external-component": "file:example-external-component",
-		"pinia": "2.2.4"
+		"pinia": "2.2.5"
 	},
 	"devDependencies": {
 		"@vitejs/plugin-vue-jsx": "workspace:*",
