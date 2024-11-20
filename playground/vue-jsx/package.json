@@ -1,13 +1,13 @@
 {
-	"dependencies": {},
-	"devDependencies": {
-		"@vitejs/plugin-vue-jsx": "workspace:*"
-	},
 	"name": "@vitejs/test-vue-jsx",
 	"scripts": {
 		"build": "vite build",
 		"debug": "node --inspect-brk vite",
 		"dev": "vite",
 		"preview": "vite preview"
+	},
+	"dependencies": {},
+	"devDependencies": {
+		"@vitejs/plugin-vue-jsx": "workspace:*"
 	}
 }

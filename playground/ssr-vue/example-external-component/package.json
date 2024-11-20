@@ -1,4 +1,4 @@
 {
-	"main": "index.js",
-	"name": "@vitejs/test-example-external-component"
+	"name": "@vitejs/test-example-external-component",
+	"main": "index.js"
 }
