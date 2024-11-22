@@ -46,6 +46,7 @@ export async function transformMain(
 	const { devServer, isProduction, devToolsEnabled } = options;
 
 	const prevDescriptor = getPrevDescriptor(filename);
+
 	const { descriptor, errors } = createDescriptor(filename, code, options);
 
 	if (fs.existsSync(filename)) {
@@ -69,11 +70,13 @@ export async function transformMain(
 		errors.forEach((error) =>
 			pluginContext.error(createRollupError(filename, error)),
 		);
+
 		return null;
 	}
 
 	// feature information
 	const attachedProps: [string, string][] = [];
+
 	const hasScoped = descriptor.styles.some((s) => s.scoped);
 
 	// script
@@ -90,7 +93,9 @@ export async function transformMain(
 		descriptor.template && !isUseInlineTemplate(descriptor, options);
 
 	let templateCode = "";
+
 	let templateMap: RawSourceMap | undefined = undefined;
+
 	if (hasTemplateImport) {
 		({ code: templateCode, map: templateMap } = await genTemplateCode(
 			descriptor,
@@ -136,6 +141,7 @@ export async function transformMain(
 		stylesCode,
 		customBlocksCode,
 	];
+
 	if (hasScoped) {
 		attachedProps.push([
 			`__scopeId`,
@@ -201,6 +207,7 @@ export async function transformMain(
 	}
 
 	let resolvedMap: RawSourceMap | undefined = undefined;
+
 	if (options.sourceMap) {
 		if (scriptMap && templateMap) {
 			// if the template is inlined into the main module (indicated by the presence
@@ -214,6 +221,7 @@ export async function transformMain(
 					"version"
 				> as TraceEncodedSourceMap,
 			);
+
 			const tracer = new TraceMap(
 				// same above
 				templateMap as Omit<
@@ -221,6 +229,7 @@ export async function transformMain(
 					"version"
 				> as TraceEncodedSourceMap,
 			);
+
 			const offset = (scriptCode.match(/\r?\n/g)?.length ?? 0) + 1;
 			eachMapping(tracer, (m) => {
 				if (m.source == null) return;
@@ -264,6 +273,7 @@ export async function transformMain(
 
 	// handle TS transpilation
 	let resolvedCode = output.join("\n");
+
 	const lang = descriptor.scriptSetup?.lang || descriptor.script?.lang;
 
 	if (
@@ -309,6 +319,7 @@ async function genTemplateCode(
 	customElement: boolean,
 ) {
 	const template = descriptor.template!;
+
 	const hasScoped = descriptor.styles.some((style) => style.scoped);
 
 	// If the template is not using pre-processor AND is not using external src,
@@ -333,16 +344,23 @@ async function genTemplateCode(
 			);
 		}
 		const src = template.src || descriptor.filename;
+
 		const srcQuery = template.src
 			? hasScoped
 				? `&src=${descriptor.id}`
 				: "&src=true"
 			: "";
+
 		const scopedQuery = hasScoped ? `&scoped=${descriptor.id}` : ``;
+
 		const attrsQuery = attrsToQuery(template.attrs, "js", true);
+
 		const query = `?vue&type=template${srcQuery}${scopedQuery}${attrsQuery}`;
+
 		const request = JSON.stringify(src + query);
+
 		const renderFnName = ssr ? "ssrRender" : "render";
+
 		return {
 			code: `import { ${renderFnName} as _sfc_${renderFnName} } from ${request}`,
 			map: undefined,
@@ -361,9 +379,11 @@ async function genScriptCode(
 	map: RawSourceMap | undefined;
 }> {
 	let scriptCode = `const ${scriptIdentifier} = {}`;
+
 	let map: RawSourceMap | undefined;
 
 	const script = resolveScript(descriptor, options, ssr, customElement);
+
 	if (script) {
 		// If the script is js/ts and has no external src, it can be directly placed
 		// in the main module.
@@ -372,6 +392,7 @@ async function genScriptCode(
 				// if compiler-sfc exposes no version, it's < 3.3 and doesn't support
 				// genDefaultAs option.
 				const userPlugins = options.script?.babelParserPlugins || [];
+
 				const defaultPlugins =
 					script.lang === "ts"
 						? userPlugins.includes("decorators")
@@ -397,11 +418,16 @@ async function genScriptCode(
 				);
 			}
 			const src = script.src || descriptor.filename;
+
 			const langFallback =
 				(script.src && path.extname(src).slice(1)) || "js";
+
 			const attrsQuery = attrsToQuery(script.attrs, langFallback);
+
 			const srcQuery = script.src ? `&src=true` : ``;
+
 			const query = `?vue&type=script${srcQuery}${attrsQuery}`;
+
 			const request = JSON.stringify(src + query);
 			scriptCode =
 				`import _sfc_main from ${request}\n` +
@@ -421,10 +447,13 @@ async function genStyleCode(
 	attachedProps: [string, string][],
 ) {
 	let stylesCode = ``;
+
 	let cssModulesMap: Record<string, string> | undefined;
+
 	if (descriptor.styles.length) {
 		for (let i = 0; i < descriptor.styles.length; i++) {
 			const style = descriptor.styles[i];
+
 			if (style.src) {
 				await linkSrcToDescriptor(
 					style.src,
@@ -437,15 +466,21 @@ async function genStyleCode(
 			// do not include module in default query, since we use it to indicate
 			// that the module needs to export the modules json
 			const attrsQuery = attrsToQuery(style.attrs, "css");
+
 			const srcQuery = style.src
 				? style.scoped
 					? `&src=${descriptor.id}`
 					: "&src=true"
 				: "";
+
 			const directQuery = customElement ? `&inline` : ``;
+
 			const scopedQuery = style.scoped ? `&scoped=${descriptor.id}` : ``;
+
 			const query = `?vue&type=style&index=${i}${srcQuery}${directQuery}${scopedQuery}`;
+
 			const styleRequest = src + query + attrsQuery;
+
 			if (style.module) {
 				if (customElement) {
 					throw new Error(
@@ -495,9 +530,11 @@ function genCSSModulesCode(
 	moduleName: string | boolean,
 ): [importCode: string, nameMap: Record<string, string>] {
 	const styleVar = `style${index}`;
+
 	const exposedName = typeof moduleName === "string" ? moduleName : "$style";
 	// inject `.module` before extension so vite handles it as css module
 	const moduleRequest = request.replace(/\.(\w+)$/, ".module.$1");
+
 	return [
 		`\nimport ${styleVar} from ${JSON.stringify(moduleRequest)}`,
 		{ [exposedName]: styleVar },
@@ -509,8 +546,10 @@ async function genCustomBlockCode(
 	pluginContext: PluginContext,
 ) {
 	let code = "";
+
 	for (let index = 0; index < descriptor.customBlocks.length; index++) {
 		const block = descriptor.customBlocks[index];
+
 		if (block.src) {
 			await linkSrcToDescriptor(
 				block.src,
@@ -520,9 +559,13 @@ async function genCustomBlockCode(
 			);
 		}
 		const src = block.src || descriptor.filename;
+
 		const attrsQuery = attrsToQuery(block.attrs, block.type);
+
 		const srcQuery = block.src ? `&src=true` : ``;
+
 		const query = `?vue&type=${block.type}&index=${index}${srcQuery}${attrsQuery}`;
+
 		const request = JSON.stringify(src + query);
 		code += `import block${index} from ${request}\n`;
 		code += `if (typeof block${index} === 'function') block${index}(_sfc_main)\n`;
@@ -567,8 +610,10 @@ function attrsToQuery(
 	forceLangFallback = false,
 ): string {
 	let query = ``;
+
 	for (const name in attrs) {
 		const value = attrs[name];
+
 		if (!ignoreList.includes(name)) {
 			query += `&${encodeURIComponent(name)}${
 				value ? `=${encodeURIComponent(value)}` : ``

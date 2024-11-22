@@ -153,6 +153,7 @@ export interface ResolvedOptions extends Options {
 
 export interface Api {
 	get options(): ResolvedOptions;
+
 	set options(value: ResolvedOptions);
 	version: string;
 }
@@ -172,10 +173,12 @@ export default function vuePlugin(rawOptions: Options = {}): Plugin<Api> {
 	const filter = computed(() =>
 		createFilter(options.value.include, options.value.exclude),
 	);
+
 	const customElementFilter = computed(() => {
 		const customElement =
 			options.value.features?.customElement ||
 			options.value.customElement;
+
 		return typeof customElement === "boolean"
 			? () => customElement
 			: createFilter(customElement);
@@ -264,6 +267,7 @@ export default function vuePlugin(rawOptions: Options = {}): Plugin<Api> {
 		buildStart() {
 			const compiler = (options.value.compiler =
 				options.value.compiler || resolveCompiler(options.value.root));
+
 			if (compiler.invalidateTypeCache) {
 				options.value.devServer?.watcher.on("unlink", (file) => {
 					compiler.invalidateTypeCache(file);
@@ -284,6 +288,7 @@ export default function vuePlugin(rawOptions: Options = {}): Plugin<Api> {
 
 		load(id, opt) {
 			const ssr = opt?.ssr === true;
+
 			if (id === EXPORT_HELPER_ID) {
 				return helperCode;
 			}
@@ -296,7 +301,9 @@ export default function vuePlugin(rawOptions: Options = {}): Plugin<Api> {
 					return fs.readFileSync(filename, "utf-8");
 				}
 				const descriptor = getDescriptor(filename, options.value)!;
+
 				let block: SFCBlock | null | undefined;
+
 				if (query.type === "script") {
 					// handle <script> + <script setup> merge via compileScript()
 					block = getResolvedScript(descriptor, ssr);
@@ -318,6 +325,7 @@ export default function vuePlugin(rawOptions: Options = {}): Plugin<Api> {
 
 		transform(code, id, opt) {
 			const ssr = opt?.ssr === true;
+
 			const { filename, query } = parseVueRequest(id);
 
 			if (query.raw || query.url) {

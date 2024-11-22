@@ -10,6 +10,7 @@ release({
 	logChangelog: (pkg) => logRecentCommits(pkg),
 	generateChangelog: async (pkgName) => {
 		console.log(colors.cyan("\nGenerating changelog..."));
+
 		const changelogArgs = [
 			"conventional-changelog",
 			"-p",

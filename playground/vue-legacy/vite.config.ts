@@ -26,6 +26,7 @@ export default defineConfig({
 	// @ts-ignore
 	__test__() {
 		const indexPath = path.resolve(__dirname, "./dist/index.html");
+
 		let index = fs.readFileSync(indexPath, "utf-8");
 		index = index
 			.replace(/<script type="module".*?<\/script>/g, "")

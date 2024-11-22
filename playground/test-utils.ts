@@ -50,13 +50,16 @@ Object.keys(colors).forEach((color) => {
 
 function componentToHex(c: number): string {
 	const hex = c.toString(16);
+
 	return hex.length === 1 ? "0" + hex : hex;
 }
 
 function rgbToHex(rgb: string): string {
 	const match = rgb.match(/rgb\((\d+),\s*(\d+),\s*(\d+)\)/);
+
 	if (match) {
 		const [_, rs, gs, bs] = match;
+
 		return (
 			"#" +
 			componentToHex(parseInt(rs, 10)) +
@@ -79,19 +82,23 @@ async function toEl(el: string | ElementHandle): Promise<ElementHandle> {
 
 export async function getColor(el: string | ElementHandle): Promise<string> {
 	el = await toEl(el);
+
 	const rgb = await el.evaluate(
 		(el) => getComputedStyle(el as Element).color,
 	);
+
 	return hexToNameMap[rgbToHex(rgb)] ?? rgb;
 }
 
 export async function getBg(el: string | ElementHandle): Promise<string> {
 	el = await toEl(el);
+
 	return el.evaluate((el) => getComputedStyle(el as Element).backgroundImage);
 }
 
 export async function getBgColor(el: string | ElementHandle): Promise<string> {
 	el = await toEl(el);
+
 	return el.evaluate((el) => getComputedStyle(el as Element).backgroundColor);
 }
 
@@ -106,7 +113,9 @@ export function editFile(
 ): void {
 	if (isBuild && !runInBuild) return;
 	filename = path.resolve(testDir, filename);
+
 	const content = fs.readFileSync(filename, "utf-8");
+
 	const modified = replacer(content);
 	fs.writeFileSync(filename, modified);
 }
@@ -121,6 +130,7 @@ export function removeFile(filename: string): void {
 
 export function listAssets(base = ""): string[] {
 	const assetsDir = path.join(testDir, "dist", base, "assets");
+
 	return fs.readdirSync(assetsDir);
 }
 
@@ -130,7 +140,9 @@ export function findAssetFile(
 	assets = "assets",
 ): string {
 	const assetsDir = path.join(testDir, "dist", base, assets);
+
 	let files: string[];
+
 	try {
 		files = fs.readdirSync(assetsDir);
 	} catch (e) {
@@ -142,6 +154,7 @@ export function findAssetFile(
 	const file = files.find((file) => {
 		return file.match(match);
 	});
+
 	return file ? fs.readFileSync(path.resolve(assetsDir, file), "utf-8") : "";
 }
 
@@ -163,11 +176,15 @@ export async function untilUpdated(
 	runInBuild = false,
 ): Promise<void> {
 	if (isBuild && !runInBuild) return;
+
 	const maxTries = process.env.CI ? 200 : 50;
+
 	for (let tries = 0; tries < maxTries; tries++) {
 		const actual = (await poll()) ?? "";
+
 		if (actual.indexOf(expected) > -1 || tries === maxTries - 1) {
 			expect(actual).toMatch(expected);
+
 			break;
 		} else {
 			await timeout(50);
@@ -183,10 +200,13 @@ export async function withRetry(
 	runInBuild = false,
 ): Promise<void> {
 	if (isBuild && !runInBuild) return;
+
 	const maxTries = process.env.CI ? 200 : 50;
+
 	for (let tries = 0; tries < maxTries; tries++) {
 		try {
 			await func();
+
 			return;
 		} catch {}
 		await timeout(50);
@@ -216,11 +236,14 @@ export async function untilBrowserLogAfter(
 	arg4?: UntilBrowserLogAfterCallback,
 ): Promise<string[]> {
 	const expectOrder = typeof arg3 === "boolean" ? arg3 : false;
+
 	const callback = typeof arg3 === "boolean" ? arg4 : arg3;
 
 	const promise = untilBrowserLog(target, expectOrder);
 	await operation();
+
 	const logs = await promise;
+
 	if (callback) {
 		await callback(logs);
 	}
@@ -232,7 +255,9 @@ async function untilBrowserLog(
 	expectOrder = true,
 ): Promise<string[]> {
 	let resolve: () => void;
+
 	let reject: (reason: any) => void;
+
 	const promise = new Promise<void>((_resolve, _reject) => {
 		resolve = _resolve;
 		reject = _reject;
@@ -254,6 +279,7 @@ async function untilBrowserLog(
 				processMsg = (text: string) => {
 					const nextTarget = remainingTargets.shift();
 					expect(text).toMatch(nextTarget);
+
 					return remainingTargets.length === 0;
 				};
 			} else {
@@ -262,6 +288,7 @@ async function untilBrowserLog(
 					const nextIndex = remainingMatchers.findIndex((matcher) =>
 						matcher(text),
 					);
+
 					if (nextIndex >= 0) {
 						remainingMatchers.splice(nextIndex, 1);
 					}
@@ -276,7 +303,9 @@ async function untilBrowserLog(
 			try {
 				const text = msg.text();
 				logs.push(text);
+
 				const done = processMsg(text);
+
 				if (done) {
 					resolve();
 				}
@@ -297,16 +326,19 @@ async function untilBrowserLog(
 
 export const extractSourcemap = (content: string): any => {
 	const lines = content.trim().split("\n");
+
 	return fromComment(lines[lines.length - 1]).toObject();
 };
 
 export const formatSourcemapForSnapshot = (map: any): any => {
 	const root = normalizePath(testDir);
+
 	const m = { ...map };
 	delete m.file;
 	delete m.names;
 	delete m.sourceRoot;
 	m.sources = m.sources.map((source) => source.replace(root, "/root"));
+
 	return m;
 };
 

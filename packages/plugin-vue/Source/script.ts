@@ -6,12 +6,14 @@ import { cache as descriptorCache } from "./utils/descriptorCache";
 
 // ssr and non ssr builds would output different script content
 const clientCache = new WeakMap<SFCDescriptor, SFCScriptBlock | null>();
+
 const ssrCache = new WeakMap<SFCDescriptor, SFCScriptBlock | null>();
 
 export const typeDepToSFCMap = new Map<string, Set<string>>();
 
 export function invalidateScript(filename: string): void {
 	const desc = descriptorCache.get(filename);
+
 	if (desc) {
 		clientCache.delete(desc);
 		ssrCache.delete(desc);
@@ -61,6 +63,7 @@ export function resolveScript(
 	}
 
 	const cached = getResolvedScript(descriptor, ssr);
+
 	if (cached) {
 		return cached;
 	}
@@ -94,6 +97,7 @@ export function resolveScript(
 
 		for (const dep of resolved.deps) {
 			const existingSet = typeDepToSFCMap.get(dep);
+
 			if (!existingSet) {
 				typeDepToSFCMap.set(dep, new Set([descriptor.filename]));
 			} else {
@@ -103,6 +107,7 @@ export function resolveScript(
 	}
 
 	setResolvedScript(descriptor, resolved, ssr);
+
 	return resolved;
 }
 
@@ -116,6 +121,7 @@ export function canInlineMain(
 		return false;
 	}
 	const lang = descriptor.script?.lang || descriptor.scriptSetup?.lang;
+
 	if (!lang || lang === "js") {
 		return true;
 	}

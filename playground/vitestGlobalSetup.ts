@@ -29,6 +29,7 @@ export async function setup(): Promise<void> {
 			dereference: false,
 			filter(file) {
 				file = file.replace(/\\/g, "/");
+
 				return !file.includes("__tests__") && !file.match(/dist(\/|$)/);
 			},
 		})
@@ -45,6 +46,7 @@ export async function setup(): Promise<void> {
 
 export async function teardown(): Promise<void> {
 	await browserServer?.close();
+
 	if (!process.env.VITE_PRESERVE_BUILD_ARTIFACTS) {
 		fs.removeSync(path.resolve(__dirname, "../playground-temp"));
 	}

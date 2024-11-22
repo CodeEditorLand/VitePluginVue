@@ -18,6 +18,7 @@ export const cache = new Map<string, SFCDescriptor>();
 // transformed by other plugins, e.g. vue-macros;
 // The HMR cached descriptors are based on the raw, pre-transform SFCs.
 export const hmrCache = new Map<string, SFCDescriptor>();
+
 const prevCache = new Map<string, SFCDescriptor | undefined>();
 
 export function createDescriptor(
@@ -37,6 +38,7 @@ export function createDescriptor(
 	const normalizedPath = normalizePath(path.relative(root, filename));
 	descriptor.id = getHash(normalizedPath + (isProduction ? source : ""));
 	(hmr ? hmrCache : cache).set(filename, descriptor);
+
 	return { descriptor, errors };
 }
 
@@ -46,8 +48,10 @@ export function getPrevDescriptor(filename: string): SFCDescriptor | undefined {
 
 export function invalidateDescriptor(filename: string, hmr = false): void {
 	const _cache = hmr ? hmrCache : cache;
+
 	const prev = _cache.get(filename);
 	_cache.delete(filename);
+
 	if (prev) {
 		prevCache.set(filename, prev);
 	}
@@ -61,6 +65,7 @@ export function getDescriptor(
 	code?: string,
 ): SFCDescriptor | undefined {
 	const _cache = hmr ? hmrCache : cache;
+
 	if (_cache.has(filename)) {
 		return _cache.get(filename)!;
 	}
@@ -71,6 +76,7 @@ export function getDescriptor(
 			options,
 			hmr,
 		);
+
 		if (errors.length && !hmr) {
 			throw errors[0];
 		}
@@ -116,6 +122,7 @@ export function setSrcDescriptor(
 		// if multiple Vue files use the same src file, they will be overwritten
 		// should use other key
 		cache.set(`${filename}?src=${entry.id}`, entry);
+
 		return;
 	}
 	cache.set(filename, entry);

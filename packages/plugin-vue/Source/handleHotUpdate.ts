@@ -31,22 +31,29 @@ export async function handleHotUpdate(
 	customElement: boolean,
 ): Promise<ModuleNode[] | void> {
 	const prevDescriptor = getDescriptor(file, options, false, true);
+
 	if (!prevDescriptor) {
 		// file hasn't been requested yet (e.g. async component)
 		return;
 	}
 
 	const content = await read();
+
 	const { descriptor } = createDescriptor(file, content, options, true);
 
 	let needRerender = false;
+
 	const affectedModules = new Set<ModuleNode | undefined>();
+
 	const mainModule = getMainModule(modules);
+
 	const templateModule = modules.find((m) => /type=template/.test(m.url));
 
 	// trigger resolveScript for descriptor so that we'll have the AST ready
 	resolveScript(descriptor, options, false, customElement);
+
 	const scriptChanged = hasScriptChanged(prevDescriptor, descriptor);
+
 	if (scriptChanged) {
 		affectedModules.add(getScriptModule(modules) || mainModule);
 	}
@@ -68,7 +75,9 @@ export async function handleHotUpdate(
 	}
 
 	let didUpdateStyle = false;
+
 	const prevStyles = prevDescriptor.styles || [];
+
 	const nextStyles = descriptor.styles || [];
 
 	// force reload if CSS vars injection changed
@@ -87,17 +96,22 @@ export async function handleHotUpdate(
 	// style updates as well.
 	for (let i = 0; i < nextStyles.length; i++) {
 		const prev = prevStyles[i];
+
 		const next = nextStyles[i];
+
 		if (!prev || !isEqualBlock(prev, next)) {
 			didUpdateStyle = true;
+
 			const mod = modules.find(
 				(m) =>
 					m.url.includes(`type=style&index=${i}`) &&
 					m.url.endsWith(`.${next.lang || "css"}`) &&
 					!directRequestRE.test(m.url),
 			);
+
 			if (mod) {
 				affectedModules.add(mod);
+
 				if (mod.url.includes("&inline")) {
 					affectedModules.add(mainModule);
 				}
@@ -113,6 +127,7 @@ export async function handleHotUpdate(
 	}
 
 	const prevCustoms = prevDescriptor.customBlocks || [];
+
 	const nextCustoms = descriptor.customBlocks || [];
 
 	// custom blocks update causes a reload
@@ -123,11 +138,14 @@ export async function handleHotUpdate(
 	} else {
 		for (let i = 0; i < nextCustoms.length; i++) {
 			const prev = prevCustoms[i];
+
 			const next = nextCustoms[i];
+
 			if (!prev || !isEqualBlock(prev, next)) {
 				const mod = modules.find((m) =>
 					m.url.includes(`type=${prev.type}&index=${i}`),
 				);
+
 				if (mod) {
 					affectedModules.add(mod);
 				} else {
@@ -138,6 +156,7 @@ export async function handleHotUpdate(
 	}
 
 	const updateType = [];
+
 	if (needRerender) {
 		updateType.push(`template`);
 		// template is inlined into main, add main module instead
@@ -175,12 +194,17 @@ export async function handleHotUpdate(
 
 export function isEqualBlock(a: SFCBlock | null, b: SFCBlock | null): boolean {
 	if (!a && !b) return true;
+
 	if (!a || !b) return false;
 	// src imports will trigger their own updates
 	if (a.src && b.src && a.src === b.src) return true;
+
 	if (a.content !== b.content) return false;
+
 	const keysA = Object.keys(a.attrs);
+
 	const keysB = Object.keys(b.attrs);
+
 	if (keysA.length !== keysB.length) {
 		return false;
 	}
@@ -224,6 +248,7 @@ function deepEqual(
 
 	// Get the keys of the objects
 	const keys1 = Object.keys(obj1);
+
 	const keys2 = Object.keys(obj2);
 
 	// Check if the number of keys is the same
@@ -264,7 +289,9 @@ function isEqualAst(prev?: t.Statement[], next?: t.Statement[]): boolean {
 
 	for (let i = 0; i < prev.length; i++) {
 		const prevNode = prev[i];
+
 		const nextNode = next[i];
+
 		if (
 			!deepEqual(prevNode, nextNode, [
 				"start",
@@ -287,6 +314,7 @@ function hasScriptChanged(prev: SFCDescriptor, next: SFCDescriptor): boolean {
 	// check for scriptAst/scriptSetupAst changes
 	// note that the next ast is not available yet, so we need to trigger parsing
 	const prevScript = getResolvedScript(prev, false);
+
 	const nextScript = getResolvedScript(next, false);
 
 	if (
@@ -309,6 +337,7 @@ function hasScriptChanged(prev: SFCDescriptor, next: SFCDescriptor): boolean {
 	const prevResolvedScript = getResolvedScript(prev, false);
 	// this is only available in vue@^3.2.23
 	const prevImports = prevResolvedScript?.imports;
+
 	if (prevImports) {
 		return !next.template || next.shouldForceReload(prevImports);
 	}
@@ -338,9 +367,12 @@ export function handleTypeDepChange(
 	{ modules, server: { moduleGraph } }: HmrContext,
 ): ModuleNode[] {
 	const affected = new Set<ModuleNode>();
+
 	for (const file of affectedComponents) {
 		invalidateScript(file);
+
 		const mods = moduleGraph.getModulesByFile(file);
+
 		if (mods) {
 			const arr = [...mods];
 			affected.add(getScriptModule(arr) || getMainModule(arr));

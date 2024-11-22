@@ -33,6 +33,7 @@ export async function transformTemplateAsModule(
 	);
 
 	let returnCode = result.code;
+
 	if (
 		options.devServer &&
 		options.devServer.config.server.hmr !== false &&
@@ -69,6 +70,7 @@ export function transformTemplateInMain(
 		ssr,
 		customElement,
 	);
+
 	return {
 		...result,
 		code: result.code.replace(
@@ -89,6 +91,7 @@ export function compile(
 ) {
 	const filename = descriptor.filename;
 	resolveScript(descriptor, options, ssr, customElement);
+
 	const result = options.compiler.compileTemplate({
 		...resolveTemplateCompilerOptions(descriptor, options, ssr)!,
 		source: code,
@@ -122,11 +125,14 @@ export function resolveTemplateCompilerOptions(
 	ssr: boolean,
 ): Omit<SFCTemplateCompileOptions, "source"> | undefined {
 	const block = descriptor.template;
+
 	if (!block) {
 		return;
 	}
 	const resolvedScript = getResolvedScript(descriptor, ssr);
+
 	const hasScoped = descriptor.styles.some((s) => s.scoped);
+
 	const { id, filename, cssVars } = descriptor;
 
 	let transformAssetUrls = options.template?.transformAssetUrls;
@@ -173,6 +179,7 @@ export function resolveTemplateCompilerOptions(
 	}
 
 	let preprocessOptions = block.lang && options.template?.preprocessOptions;
+
 	if (block.lang === "pug") {
 		preprocessOptions = {
 			doctype: "html",
@@ -183,7 +190,9 @@ export function resolveTemplateCompilerOptions(
 	// if using TS, support TS syntax in template expressions
 	const expressionPlugins: CompilerOptions["expressionPlugins"] =
 		options.template?.compilerOptions?.expressionPlugins || [];
+
 	const lang = descriptor.scriptSetup?.lang || descriptor.script?.lang;
+
 	if (
 		lang &&
 		/tsx?$/.test(lang) &&
@@ -227,6 +236,7 @@ export function resolveTemplateCompilerOptions(
 function canReuseAST(version: string | undefined) {
 	if (version) {
 		const [_, minor, patch] = version.split(".").map(Number);
+
 		if (minor >= 4 && patch >= 3) {
 			return true;
 		}

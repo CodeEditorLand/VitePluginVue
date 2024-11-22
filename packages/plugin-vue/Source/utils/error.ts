@@ -6,6 +6,7 @@ export function createRollupError(
 	error: CompilerError | SyntaxError,
 ): RollupError {
 	const { message, name, stack } = error;
+
 	const rollupError: RollupError = {
 		id,
 		plugin: "vue",

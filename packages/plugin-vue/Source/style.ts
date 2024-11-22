@@ -48,6 +48,7 @@ export async function transformStyle(
 			}
 			pluginContext.error(error);
 		});
+
 		return null;
 	}
 

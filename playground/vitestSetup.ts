@@ -96,6 +96,7 @@ beforeAll(async (s) => {
 	}
 
 	const wsEndpoint = fs.readFileSync(join(DIR, "wsEndpoint"), "utf-8");
+
 	if (!wsEndpoint) {
 		throw new Error("wsEndpoint not found");
 	}
@@ -104,10 +105,12 @@ beforeAll(async (s) => {
 	page = await browser.newPage();
 
 	const globalConsole = global.console;
+
 	const warn = globalConsole.warn;
 	globalConsole.warn = (msg, ...args) => {
 		// suppress @vue/reactivity-transform warning
 		if (msg.includes("@vue/reactivity-transform")) return;
+
 		if (msg.includes("Generated an empty chunk")) return;
 		warn.call(globalConsole, msg, ...args);
 	};
@@ -149,14 +152,18 @@ beforeAll(async (s) => {
 			if (testCustomServe) {
 				// test has custom server configuration.
 				const mod = await import(testCustomServe);
+
 				const serve = mod.serve || mod.default?.serve;
+
 				const preServe = mod.preServe || mod.default?.preServe;
+
 				if (preServe) {
 					await preServe();
 				}
 				if (serve) {
 					server = await serve();
 					viteServer = mod.viteServer;
+
 					return;
 				}
 			} else {
@@ -170,6 +177,7 @@ beforeAll(async (s) => {
 		// a timeout with an exception that hides the real error in the console.
 		await page.close();
 		await server?.close();
+
 		throw e;
 	}
 
@@ -178,6 +186,7 @@ beforeAll(async (s) => {
 		await page?.close();
 		await server?.close();
 		await watcher?.close();
+
 		if (browser) {
 			await browser.close();
 		}
@@ -199,12 +208,14 @@ export async function startDefaultServe(): Promise<void> {
 	let config: UserConfig | null = null;
 	// config file near the *.spec.ts
 	const res = await loadConfigFromDir(dirname(testPath));
+
 	if (res) {
 		config = res.config;
 	}
 	// config file from test root dir
 	if (!config) {
 		const res = await loadConfigFromDir(rootDir);
+
 		if (res) {
 			config = res.config;
 		}
@@ -240,6 +251,7 @@ export async function startDefaultServe(): Promise<void> {
 
 	if (!isBuild) {
 		process.env.VITE_INLINE = "inline-serve";
+
 		const testConfig = mergeConfig(options, config || {});
 		viteConfig = testConfig;
 		viteServer = server = await (await createServer(testConfig)).listen();
@@ -259,9 +271,12 @@ export async function startDefaultServe(): Promise<void> {
 			},
 		});
 		options.plugins = [resolvedPlugin()];
+
 		const testConfig = mergeConfig(options, config || {});
 		viteConfig = testConfig;
+
 		const rollupOutput = await build(testConfig);
+
 		const isWatch = !!resolvedConfig!.build.watch;
 		// in build watch,call startStaticServer after the build is complete
 		if (isWatch) {
@@ -274,6 +289,7 @@ export async function startDefaultServe(): Promise<void> {
 			config.__test__();
 		}
 		const _nodeEnv = process.env.NODE_ENV;
+
 		const previewServer = await preview(testConfig);
 		// prevent preview change NODE_ENV
 		process.env.NODE_ENV = _nodeEnv;
@@ -289,6 +305,7 @@ export async function notifyRebuildComplete(
 	watcher: RollupWatcher,
 ): Promise<RollupWatcher> {
 	let resolveFn: undefined | (() => void);
+
 	const callback = (event: RollupWatcherEvent): void => {
 		if (event.code === "END") {
 			resolveFn?.();
@@ -298,11 +315,13 @@ export async function notifyRebuildComplete(
 	await new Promise<void>((resolve) => {
 		resolveFn = resolve;
 	});
+
 	return watcher.off("event", callback);
 }
 
 function createInMemoryLogger(logs: string[]): Logger {
 	const loggedErrors = new WeakSet<Error | RollupError>();
+
 	const warnedMessages = new Set<string>();
 
 	const logger: Logger = {
@@ -324,6 +343,7 @@ function createInMemoryLogger(logs: string[]): Logger {
 		},
 		error(msg, opts) {
 			logs.push(msg);
+
 			if (opts?.error) {
 				loggedErrors.add(opts.error);
 			}
@@ -337,6 +357,7 @@ function setupConsoleWarnCollector(logs: string[]) {
 	const warn = console.warn;
 	console.warn = (...args) => {
 		serverLogs.push(args.join(" "));
+
 		return warn.call(console, ...args);
 	};
 }

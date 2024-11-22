@@ -20,6 +20,7 @@ import { readFileSync, writeFileSync } from "node:fs";
 import colors from "picocolors";
 
 const indexPath = "dist/index.cjs";
+
 let code = readFileSync(indexPath, "utf-8");
 
 const matchMixed = code.match(/\nexports.default = (\w+);/);
@@ -31,9 +32,11 @@ if (matchMixed) {
 	// search from the end to prepend `modules.` to `export[xxx]`
 	for (let i = lines.length - 1; i > 0; i--) {
 		if (lines[i].startsWith("exports")) lines[i] = "module." + lines[i];
+
 		else {
 			// at the beginning of exports, export the default function
 			lines[i] += `\nmodule.exports = ${name};`;
+
 			break;
 		}
 	}

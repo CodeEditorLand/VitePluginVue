@@ -14,13 +14,17 @@ export function run<EO extends ExecaOptions>(
 
 export async function getLatestTag(pkgName: string): Promise<string> {
 	const pkgJson = await fs.readJson(`packages/${pkgName}/package.json`);
+
 	const version = pkgJson.version;
+
 	return `${pkgName}@${version}`;
 }
 
 export async function logRecentCommits(pkgName: string): Promise<void> {
 	const tag = await getLatestTag(pkgName);
+
 	if (!tag) return;
+
 	const sha = await run("git", ["rev-list", "-n", "1", tag], {
 		stdio: "pipe",
 	}).then((res) => res.stdout.trim());
@@ -48,14 +52,18 @@ export async function logRecentCommits(pkgName: string): Promise<void> {
 
 export async function updateTemplateVersions(): Promise<void> {
 	const viteVersion = fs.readJSONSync("packages/vite/package.json").version;
+
 	if (/beta|alpha|rc/.test(viteVersion)) return;
 
 	const dir = "packages/create-vite";
+
 	const templates = readdirSync(dir).filter((dir) =>
 		dir.startsWith("template-"),
 	);
+
 	for (const template of templates) {
 		const pkgPath = path.join(dir, template, `package.json`);
+
 		const pkg = fs.readJSONSync(pkgPath);
 		pkg.devDependencies.vite = `^` + viteVersion;
 		writeFileSync(pkgPath, JSON.stringify(pkg, null, 2) + "\n");

@@ -13,6 +13,7 @@ import type { Options } from "./types";
 export * from "./types";
 
 const ssrRegisterHelperId = "/__vue-jsx-ssr-register-helper";
+
 const ssrRegisterHelperCode =
 	`import { useSSRContext } from "vue"\n` +
 	`export ${ssrRegisterHelper.toString()}`;
@@ -27,6 +28,7 @@ function ssrRegisterHelper(comp: ComponentOptions, filename: string) {
 		// @ts-ignore
 		const ssrContext = useSSRContext();
 		(ssrContext.modules || (ssrContext.modules = new Set())).add(filename);
+
 		if (setup) {
 			return setup(props, ctx);
 		}
@@ -35,7 +37,9 @@ function ssrRegisterHelper(comp: ComponentOptions, filename: string) {
 
 function vueJsxPlugin(options: Options = {}): Plugin {
 	let root = "";
+
 	let needHmr = false;
+
 	let needSourceMap = true;
 
 	const {
@@ -44,6 +48,7 @@ function vueJsxPlugin(options: Options = {}): Plugin {
 		babelPlugins = [],
 		...babelPluginOptions
 	} = options;
+
 	const filter = createFilter(include || /\.[jt]sx$/, exclude);
 
 	return {
@@ -89,12 +94,14 @@ function vueJsxPlugin(options: Options = {}): Plugin {
 
 		async transform(code, id, opt) {
 			const ssr = opt?.ssr === true;
+
 			const [filepath] = id.split("?");
 
 			// use id for script blocks in Vue SFCs (e.g. `App.vue?vue&type=script&lang.jsx`)
 			// use filepath for plain jsx files (e.g. App.jsx)
 			if (filter(id) || filter(filepath)) {
 				const plugins = [[jsx, babelPluginOptions], ...babelPlugins];
+
 				if (id.endsWith(".tsx") || filepath.endsWith(".tsx")) {
 					plugins.push([
 						// @ts-ignore missing type
@@ -137,6 +144,7 @@ function vueJsxPlugin(options: Options = {}): Plugin {
 
 				if (!ssr && !needHmr) {
 					if (!result.code) return;
+
 					return {
 						code: result.code,
 						map: result.map,
@@ -145,18 +153,22 @@ function vueJsxPlugin(options: Options = {}): Plugin {
 
 				interface HotComponent {
 					local: string;
+
 					exported: string;
 					id: string;
 				}
 
 				// check for hmr injection
 				const declaredComponents: string[] = [];
+
 				const hotComponents: HotComponent[] = [];
+
 				let hasDefault = false;
 
 				for (const node of result.ast!.program.body) {
 					if (node.type === "VariableDeclaration") {
 						const names = parseComponentDecls(node);
+
 						if (names.length) {
 							declaredComponents.push(...names);
 						}
@@ -185,6 +197,7 @@ function vueJsxPlugin(options: Options = {}): Plugin {
 									const matched = declaredComponents.find(
 										(name) => name === spec.local.name,
 									);
+
 									if (matched) {
 										hotComponents.push({
 											local: spec.local.name,
@@ -202,9 +215,11 @@ function vueJsxPlugin(options: Options = {}): Plugin {
 					if (node.type === "ExportDefaultDeclaration") {
 						if (node.declaration.type === "Identifier") {
 							const _name = node.declaration.name;
+
 							const matched = declaredComponents.find(
 								(name) => name === _name,
 							);
+
 							if (matched) {
 								hotComponents.push({
 									local: _name,
@@ -234,7 +249,9 @@ function vueJsxPlugin(options: Options = {}): Plugin {
 
 					if (needHmr && !ssr && !/\?vue&type=script/.test(id)) {
 						let code = result.code;
+
 						let callbackCode = ``;
+
 						for (const { local, exported, id } of hotComponents) {
 							code +=
 								`\n${local}.__hmrId = "${id}"` +
@@ -254,9 +271,11 @@ function vueJsxPlugin(options: Options = {}): Plugin {
 						const normalizedId = normalizePath(
 							path.relative(root, id),
 						);
+
 						let ssrInjectCode =
 							`\nimport { ssrRegisterHelper } from "${ssrRegisterHelperId}"` +
 							`\nconst __moduleId = ${JSON.stringify(normalizedId)}`;
+
 						for (const { local } of hotComponents) {
 							ssrInjectCode += `\nssrRegisterHelper(${local}, __moduleId)`;
 						}
@@ -265,6 +284,7 @@ function vueJsxPlugin(options: Options = {}): Plugin {
 				}
 
 				if (!result.code) return;
+
 				return {
 					code: result.code,
 					map: result.map,
@@ -276,6 +296,7 @@ function vueJsxPlugin(options: Options = {}): Plugin {
 
 function parseComponentDecls(node: types.VariableDeclaration) {
 	const names = [];
+
 	for (const decl of node.declarations) {
 		if (decl.id.type === "Identifier" && isDefineComponentCall(decl.init)) {
 			names.push(decl.id.name);
