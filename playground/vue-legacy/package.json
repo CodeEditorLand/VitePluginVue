@@ -1,7 +1,7 @@
 {
 	"dependencies": {},
 	"devDependencies": {
-		"@vitejs/plugin-legacy": "5.4.3"
+		"@vitejs/plugin-legacy": "6.0.0"
 	},
 	"name": "@vitejs/test-vue-legacy",
 	"scripts": {

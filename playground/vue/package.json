@@ -4,7 +4,7 @@
 	},
 	"devDependencies": {
 		"js-yaml": "4.1.0",
-		"less": "4.2.0",
+		"less": "4.2.1",
 		"pug": "3.0.3",
 		"sass": "1.81.0",
 		"stylus": "0.64.0"
