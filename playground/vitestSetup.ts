@@ -24,7 +24,9 @@ import { beforeAll, type File } from "vitest";
 export const workspaceRoot = resolve(__dirname, "../");
 
 export const isBuild = !!process.env.VITE_TEST_BUILD;
+
 export const isServe = !isBuild;
+
 export const isWindows = process.platform === "win32";
 
 // #endregion
@@ -60,14 +62,19 @@ export let testName: string;
 export let viteConfig: InlineConfig | undefined;
 
 export const serverLogs: string[] = [];
+
 export const browserLogs: string[] = [];
+
 export const browserErrors: Error[] = [];
 
 export let resolvedConfig: ResolvedConfig = undefined!;
 
 export let page: Page = undefined!;
+
 export let browser: Browser = undefined!;
+
 export let viteTestUrl: string = "";
+
 export let watcher: RollupWatcher | undefined = undefined;
 
 declare module "vite" {

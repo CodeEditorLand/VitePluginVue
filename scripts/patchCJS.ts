@@ -4,6 +4,7 @@ It converts
 
 ```ts
 exports.default = vuePlugin;
+
 exports.parseVueRequest = parseVueRequest;
 ```
 

@@ -27,6 +27,7 @@ import {
 import { parseVueRequest } from "./utils/query";
 
 export { parseVueRequest } from "./utils/query";
+
 export type { VueQuery } from "./utils/query";
 
 export interface Options {
