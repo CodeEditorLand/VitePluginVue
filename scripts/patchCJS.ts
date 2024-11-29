@@ -33,6 +33,7 @@ if (matchMixed) {
 	// search from the end to prepend `modules.` to `export[xxx]`
 	for (let i = lines.length - 1; i > 0; i--) {
 		if (lines[i].startsWith("exports")) lines[i] = "module." + lines[i];
+
 		else {
 			// at the beginning of exports, export the default function
 			lines[i] += `\nmodule.exports = ${name};`;
@@ -44,6 +45,7 @@ if (matchMixed) {
 	writeFileSync(indexPath, lines.join("\n"));
 
 	console.log(colors.bold(`${indexPath} CJS patched`));
+
 	process.exit(0);
 }
 
@@ -51,8 +53,11 @@ const matchDefault = code.match(/\nmodule.exports = (\w+);/);
 
 if (matchDefault) {
 	code += `module.exports.default = ${matchDefault[1]};\n`;
+
 	writeFileSync(indexPath, code);
+
 	console.log(colors.bold(`${indexPath} CJS patched`));
+
 	process.exit(0);
 }
 

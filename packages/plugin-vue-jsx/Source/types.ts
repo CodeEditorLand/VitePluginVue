@@ -3,6 +3,7 @@ import type { FilterPattern } from "vite";
 
 export interface FilterOptions {
 	include?: FilterPattern;
+
 	exclude?: FilterPattern;
 }
 

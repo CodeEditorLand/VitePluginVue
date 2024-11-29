@@ -70,7 +70,9 @@ export async function handleHotUpdate(
 				false,
 			);
 		}
+
 		affectedModules.add(templateModule);
+
 		needRerender = true;
 	}
 
@@ -89,6 +91,7 @@ export async function handleHotUpdate(
 	if (prevStyles.some((s) => s.scoped) !== nextStyles.some((s) => s.scoped)) {
 		// template needs to be invalidated as well
 		affectedModules.add(templateModule);
+
 		affectedModules.add(mainModule);
 	}
 
@@ -121,6 +124,7 @@ export async function handleHotUpdate(
 			}
 		}
 	}
+
 	if (prevStyles.length > nextStyles.length) {
 		// style block removed - force reload
 		affectedModules.add(mainModule);
@@ -166,12 +170,15 @@ export async function handleHotUpdate(
 			const styleImporters = [...mainModule.importers].filter((m) =>
 				isCSSRequest(m.url),
 			);
+
 			styleImporters.forEach((m) => affectedModules.add(m));
 		}
 	}
+
 	if (didUpdateStyle) {
 		updateType.push(`style`);
 	}
+
 	if (updateType.length) {
 		if (file.endsWith(".vue")) {
 			// invalidate the descriptor cache so that the next transform will
@@ -187,8 +194,10 @@ export async function handleHotUpdate(
 			// the file type - not impossible, but should be extremely unlikely.
 			cache.set(file, descriptor);
 		}
+
 		debug(`[vue:update(${updateType.join("&")})] ${file}`);
 	}
+
 	return [...affectedModules].filter(Boolean) as ModuleNode[];
 }
 
@@ -208,6 +217,7 @@ export function isEqualBlock(a: SFCBlock | null, b: SFCBlock | null): boolean {
 	if (keysA.length !== keysB.length) {
 		return false;
 	}
+
 	return keysA.every((key) => a.attrs[key] === b.attrs[key]);
 }
 
@@ -323,6 +333,7 @@ function hasScriptChanged(prev: SFCDescriptor, next: SFCDescriptor): boolean {
 	) {
 		return true;
 	}
+
 	if (
 		!isEqualBlock(prev.scriptSetup, next.scriptSetup) &&
 		!isEqualAst(prevScript?.scriptSetupAst, nextScript?.scriptSetupAst)
@@ -375,8 +386,10 @@ export function handleTypeDepChange(
 
 		if (mods) {
 			const arr = [...mods];
+
 			affected.add(getScriptModule(arr) || getMainModule(arr));
 		}
 	}
+
 	return [...modules, ...affected];
 }

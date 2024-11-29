@@ -46,6 +46,7 @@ export async function transformStyle(
 					column: error.column,
 				};
 			}
+
 			pluginContext.error(error);
 		});
 

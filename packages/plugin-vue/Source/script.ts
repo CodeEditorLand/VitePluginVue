@@ -16,6 +16,7 @@ export function invalidateScript(filename: string): void {
 
 	if (desc) {
 		clientCache.delete(desc);
+
 		ssrCache.delete(desc);
 	}
 }
@@ -120,13 +121,16 @@ export function canInlineMain(
 	if (descriptor.script?.src || descriptor.scriptSetup?.src) {
 		return false;
 	}
+
 	const lang = descriptor.script?.lang || descriptor.scriptSetup?.lang;
 
 	if (!lang || lang === "js") {
 		return true;
 	}
+
 	if (lang === "ts" && options.devServer) {
 		return true;
 	}
+
 	return false;
 }

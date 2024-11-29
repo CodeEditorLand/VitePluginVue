@@ -148,6 +148,7 @@ export async function transformMain(
 			JSON.stringify(`data-v-${descriptor.id}`),
 		]);
 	}
+
 	if (devToolsEnabled || (devServer && !isProduction)) {
 		// expose filename during serve for devtools to pickup
 		attachedProps.push([
@@ -164,6 +165,7 @@ export async function transformMain(
 		!isProduction
 	) {
 		output.push(`_sfc_main.__hmrId = ${JSON.stringify(descriptor.id)}`);
+
 		output.push(
 			`typeof __VUE_HMR_RUNTIME__ !== 'undefined' && ` +
 				`__VUE_HMR_RUNTIME__.createRecord(_sfc_main.__hmrId, _sfc_main)`,
@@ -175,6 +177,7 @@ export async function transformMain(
 		) {
 			output.push(`export const _rerender_only = true`);
 		}
+
 		output.push(
 			`import.meta.hot.accept(mod => {`,
 			`  if (!mod) return`,
@@ -193,6 +196,7 @@ export async function transformMain(
 		const normalizedFilename = normalizePath(
 			path.relative(options.root, filename),
 		);
+
 		output.push(
 			`import { useSSRContext as __vite_useSSRContext } from 'vue'`,
 			`const _sfc_setup = _sfc_main.setup`,
@@ -231,8 +235,10 @@ export async function transformMain(
 			);
 
 			const offset = (scriptCode.match(/\r?\n/g)?.length ?? 0) + 1;
+
 			eachMapping(tracer, (m) => {
 				if (m.source == null) return;
+
 				addMapping(gen, {
 					source: m.source,
 					original: {
@@ -291,7 +297,9 @@ export async function transformMain(
 			},
 			resolvedMap,
 		);
+
 		resolvedCode = code;
+
 		resolvedMap = resolvedMap ? (map as any) : resolvedMap;
 	}
 
@@ -343,6 +351,7 @@ async function genTemplateCode(
 				hasScoped,
 			);
 		}
+
 		const src = template.src || descriptor.filename;
 
 		const srcQuery = template.src
@@ -376,6 +385,7 @@ async function genScriptCode(
 	customElement: boolean,
 ): Promise<{
 	code: string;
+
 	map: RawSourceMap | undefined;
 }> {
 	let scriptCode = `const ${scriptIdentifier} = {}`;
@@ -399,6 +409,7 @@ async function genScriptCode(
 							? (["typescript"] as const)
 							: (["typescript", "decorators-legacy"] as const)
 						: [];
+
 				scriptCode = options.compiler.rewriteDefault(
 					script.content,
 					scriptIdentifier,
@@ -407,6 +418,7 @@ async function genScriptCode(
 			} else {
 				scriptCode = script.content;
 			}
+
 			map = script.map;
 		} else {
 			if (script.src) {
@@ -417,6 +429,7 @@ async function genScriptCode(
 					false,
 				);
 			}
+
 			const src = script.src || descriptor.filename;
 
 			const langFallback =
@@ -429,11 +442,13 @@ async function genScriptCode(
 			const query = `?vue&type=script${srcQuery}${attrsQuery}`;
 
 			const request = JSON.stringify(src + query);
+
 			scriptCode =
 				`import _sfc_main from ${request}\n` +
 				`export * from ${request}`; // support named exports
 		}
 	}
+
 	return {
 		code: scriptCode,
 		map,
@@ -462,6 +477,7 @@ async function genStyleCode(
 					style.scoped,
 				);
 			}
+
 			const src = style.src || descriptor.filename;
 			// do not include module in default query, since we use it to indicate
 			// that the module needs to export the modules json
@@ -487,12 +503,15 @@ async function genStyleCode(
 						`<style module> is not supported in custom elements mode.`,
 					);
 				}
+
 				const [importCode, nameMap] = genCSSModulesCode(
 					i,
 					styleRequest,
 					style.module,
 				);
+
 				stylesCode += importCode;
+
 				Object.assign((cssModulesMap ||= {}), nameMap);
 			} else {
 				if (customElement) {
@@ -505,6 +524,7 @@ async function genStyleCode(
 			}
 			// TODO SSR critical CSS collection
 		}
+
 		if (customElement) {
 			attachedProps.push([
 				`styles`,
@@ -512,15 +532,19 @@ async function genStyleCode(
 			]);
 		}
 	}
+
 	if (cssModulesMap) {
 		const mappingCode =
 			Object.entries(cssModulesMap).reduce(
 				(code, [key, value]) => code + `"${key}":${value},\n`,
 				"{\n",
 			) + "}";
+
 		stylesCode += `\nconst cssModules = ${mappingCode}`;
+
 		attachedProps.push([`__cssModules`, `cssModules`]);
 	}
+
 	return stylesCode;
 }
 
@@ -558,6 +582,7 @@ async function genCustomBlockCode(
 				false,
 			);
 		}
+
 		const src = block.src || descriptor.filename;
 
 		const attrsQuery = attrsToQuery(block.attrs, block.type);
@@ -567,9 +592,12 @@ async function genCustomBlockCode(
 		const query = `?vue&type=${block.type}&index=${index}${srcQuery}${attrsQuery}`;
 
 		const request = JSON.stringify(src + query);
+
 		code += `import block${index} from ${request}\n`;
+
 		code += `if (typeof block${index} === 'function') block${index}(_sfc_main)\n`;
 	}
+
 	return code;
 }
 
@@ -620,6 +648,7 @@ function attrsToQuery(
 			}`;
 		}
 	}
+
 	if (langFallback || attrs.lang) {
 		query +=
 			`lang` in attrs
@@ -628,5 +657,6 @@ function attrsToQuery(
 					: `&lang.${attrs.lang}`
 				: `&lang.${langFallback}`;
 	}
+
 	return query;
 }

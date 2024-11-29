@@ -28,6 +28,7 @@ export async function logRecentCommits(pkgName: string): Promise<void> {
 	const sha = await run("git", ["rev-list", "-n", "1", tag], {
 		stdio: "pipe",
 	}).then((res) => res.stdout.trim());
+
 	console.log(
 		colors.bold(
 			`\n${colors.blue(`i`)} Commits of ${colors.green(
@@ -35,6 +36,7 @@ export async function logRecentCommits(pkgName: string): Promise<void> {
 			)} since ${colors.green(tag)} ${colors.gray(`(${sha.slice(0, 5)})`)}`,
 		),
 	);
+
 	await run(
 		"git",
 		[
@@ -47,6 +49,7 @@ export async function logRecentCommits(pkgName: string): Promise<void> {
 		],
 		{ stdio: "inherit" },
 	);
+
 	console.log();
 }
 
@@ -65,7 +68,9 @@ export async function updateTemplateVersions(): Promise<void> {
 		const pkgPath = path.join(dir, template, `package.json`);
 
 		const pkg = fs.readJSONSync(pkgPath);
+
 		pkg.devDependencies.vite = `^` + viteVersion;
+
 		writeFileSync(pkgPath, JSON.stringify(pkg, null, 2) + "\n");
 	}
 }

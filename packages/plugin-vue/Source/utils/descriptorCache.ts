@@ -9,6 +9,7 @@ import type { ResolvedOptions, VueQuery } from "..";
 // compiler-sfc should be exported so it can be re-used
 export interface SFCParseResult {
 	descriptor: SFCDescriptor;
+
 	errors: (CompilerError | SyntaxError)[];
 }
 
@@ -36,6 +37,7 @@ export function createDescriptor(
 	// ensure the path is normalized in a way that is consistent inside
 	// project (relative to root) and on different systems.
 	const normalizedPath = normalizePath(path.relative(root, filename));
+
 	descriptor.id = getHash(normalizedPath + (isProduction ? source : ""));
 	(hmr ? hmrCache : cache).set(filename, descriptor);
 
@@ -50,6 +52,7 @@ export function invalidateDescriptor(filename: string, hmr = false): void {
 	const _cache = hmr ? hmrCache : cache;
 
 	const prev = _cache.get(filename);
+
 	_cache.delete(filename);
 
 	if (prev) {
@@ -69,6 +72,7 @@ export function getDescriptor(
 	if (_cache.has(filename)) {
 		return _cache.get(filename)!;
 	}
+
 	if (createIfNotFound) {
 		const { descriptor, errors } = createDescriptor(
 			filename,
@@ -80,6 +84,7 @@ export function getDescriptor(
 		if (errors.length && !hmr) {
 			throw errors[0];
 		}
+
 		return descriptor;
 	}
 }
@@ -91,6 +96,7 @@ export function getSrcDescriptor(
 	if (query.scoped) {
 		return cache.get(`${filename}?src=${query.src}`)!;
 	}
+
 	return cache.get(filename)!;
 }
 
@@ -125,6 +131,7 @@ export function setSrcDescriptor(
 
 		return;
 	}
+
 	cache.set(filename, entry);
 }
 

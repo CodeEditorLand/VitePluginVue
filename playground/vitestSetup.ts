@@ -109,16 +109,19 @@ beforeAll(async (s) => {
 	}
 
 	browser = await chromium.connect(wsEndpoint);
+
 	page = await browser.newPage();
 
 	const globalConsole = global.console;
 
 	const warn = globalConsole.warn;
+
 	globalConsole.warn = (msg, ...args) => {
 		// suppress @vue/reactivity-transform warning
 		if (msg.includes("@vue/reactivity-transform")) return;
 
 		if (msg.includes("Generated an empty chunk")) return;
+
 		warn.call(globalConsole, msg, ...args);
 	};
 
@@ -132,14 +135,18 @@ beforeAll(async (s) => {
 			) {
 				return;
 			}
+
 			browserLogs.push(msg.text());
 		});
+
 		page.on("pageerror", (error) => {
 			browserErrors.push(error);
 		});
 
 		testPath = suite.filepath!;
+
 		testName = slash(testPath).match(/playground\/([\w-]+)\//)?.[1];
+
 		testDir = dirname(testPath);
 
 		// if this is a test placed under playground/xxx/__tests__
@@ -149,6 +156,7 @@ beforeAll(async (s) => {
 
 			// when `root` dir is present, use it as vite's root
 			const testCustomRoot = resolve(testDir, "root");
+
 			rootDir = fs.existsSync(testCustomRoot) ? testCustomRoot : testDir;
 
 			const testCustomServe = [
@@ -167,8 +175,10 @@ beforeAll(async (s) => {
 				if (preServe) {
 					await preServe();
 				}
+
 				if (serve) {
 					server = await serve();
+
 					viteServer = mod.viteServer;
 
 					return;
@@ -183,6 +193,7 @@ beforeAll(async (s) => {
 		// If the page remains open, a command like `await page.click(...)` produces
 		// a timeout with an exception that hides the real error in the console.
 		await page.close();
+
 		await server?.close();
 
 		throw e;
@@ -190,8 +201,11 @@ beforeAll(async (s) => {
 
 	return async () => {
 		serverLogs.length = 0;
+
 		await page?.close();
+
 		await server?.close();
+
 		await watcher?.close();
 
 		if (browser) {
@@ -260,13 +274,17 @@ export async function startDefaultServe(): Promise<void> {
 		process.env.VITE_INLINE = "inline-serve";
 
 		const testConfig = mergeConfig(options, config || {});
+
 		viteConfig = testConfig;
+
 		viteServer = server = await (await createServer(testConfig)).listen();
 		// use resolved port/base from server
 		const devBase = server.config.base;
+
 		viteTestUrl = `http://localhost:${server.config.server.port}${
 			devBase === "/" ? "" : devBase
 		}`;
+
 		await page.goto(viteTestUrl);
 	} else {
 		process.env.VITE_INLINE = "inline-build";
@@ -277,9 +295,11 @@ export async function startDefaultServe(): Promise<void> {
 				resolvedConfig = config;
 			},
 		});
+
 		options.plugins = [resolvedPlugin()];
 
 		const testConfig = mergeConfig(options, config || {});
+
 		viteConfig = testConfig;
 
 		const rollupOutput = await build(testConfig);
@@ -288,6 +308,7 @@ export async function startDefaultServe(): Promise<void> {
 		// in build watch,call startStaticServer after the build is complete
 		if (isWatch) {
 			watcher = rollupOutput as RollupWatcher;
+
 			await notifyRebuildComplete(watcher);
 		}
 		// @ts-ignore
@@ -295,12 +316,15 @@ export async function startDefaultServe(): Promise<void> {
 			// @ts-ignore
 			config.__test__();
 		}
+
 		const _nodeEnv = process.env.NODE_ENV;
 
 		const previewServer = await preview(testConfig);
 		// prevent preview change NODE_ENV
 		process.env.NODE_ENV = _nodeEnv;
+
 		viteTestUrl = previewServer.resolvedUrls.local[0];
+
 		await page.goto(viteTestUrl);
 	}
 }
@@ -318,7 +342,9 @@ export async function notifyRebuildComplete(
 			resolveFn?.();
 		}
 	};
+
 	watcher.on("event", callback);
+
 	await new Promise<void>((resolve) => {
 		resolveFn = resolve;
 	});
@@ -340,12 +366,16 @@ function createInMemoryLogger(logs: string[]): Logger {
 		},
 		warn(msg) {
 			logs.push(msg);
+
 			logger.hasWarned = true;
 		},
 		warnOnce(msg) {
 			if (warnedMessages.has(msg)) return;
+
 			logs.push(msg);
+
 			logger.hasWarned = true;
+
 			warnedMessages.add(msg);
 		},
 		error(msg, opts) {
@@ -362,6 +392,7 @@ function createInMemoryLogger(logs: string[]): Logger {
 
 function setupConsoleWarnCollector(logs: string[]) {
 	const warn = console.warn;
+
 	console.warn = (...args) => {
 		serverLogs.push(args.join(" "));
 

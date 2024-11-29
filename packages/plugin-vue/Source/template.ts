@@ -21,6 +21,7 @@ export async function transformTemplateAsModule(
 	customElement: boolean,
 ): Promise<{
 	code: string;
+
 	map: any;
 }> {
 	const result = compile(
@@ -90,6 +91,7 @@ export function compile(
 	customElement: boolean,
 ) {
 	const filename = descriptor.filename;
+
 	resolveScript(descriptor, options, ssr, customElement);
 
 	const result = options.compiler.compileTemplate({
@@ -129,6 +131,7 @@ export function resolveTemplateCompilerOptions(
 	if (!block) {
 		return;
 	}
+
 	const resolvedScript = getResolvedScript(descriptor, ssr);
 
 	const hasScoped = descriptor.styles.some((s) => s.scoped);
@@ -146,6 +149,7 @@ export function resolveTemplateCompilerOptions(
 		// request
 		if (filename.startsWith(options.root)) {
 			const devBase = options.devServer.config.base;
+
 			assetUrlOptions = {
 				base:
 					(options.devServer.config.server?.origin ?? "") +
@@ -241,5 +245,6 @@ function canReuseAST(version: string | undefined) {
 			return true;
 		}
 	}
+
 	return false;
 }

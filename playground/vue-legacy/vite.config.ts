@@ -28,9 +28,11 @@ export default defineConfig({
 		const indexPath = path.resolve(__dirname, "./dist/index.html");
 
 		let index = fs.readFileSync(indexPath, "utf-8");
+
 		index = index
 			.replace(/<script type="module".*?<\/script>/g, "")
 			.replace(/<script nomodule/g, "<script");
+
 		fs.writeFileSync(indexPath, index);
 	},
 });

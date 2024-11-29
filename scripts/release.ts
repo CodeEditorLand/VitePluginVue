@@ -23,6 +23,7 @@ release({
 			"--lerna-package",
 			pkgName,
 		];
+
 		await run("npx", changelogArgs, { cwd: `packages/${pkgName}` });
 	},
 });

@@ -16,14 +16,18 @@ export async function setup(): Promise<void> {
 	});
 
 	await fs.mkdirp(DIR);
+
 	await fs.writeFile(
 		path.join(DIR, "wsEndpoint"),
 		browserServer.wsEndpoint(),
 	);
 
 	const tempDir = path.resolve(__dirname, "../playground-temp");
+
 	await fs.ensureDir(tempDir);
+
 	await fs.emptyDir(tempDir);
+
 	await fs
 		.copy(path.resolve(__dirname, "../playground"), tempDir, {
 			dereference: false,

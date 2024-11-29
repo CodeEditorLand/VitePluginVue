@@ -32,6 +32,7 @@ export type { VueQuery } from "./utils/query";
 
 export interface Options {
 	include?: string | RegExp | (string | RegExp)[];
+
 	exclude?: string | RegExp | (string | RegExp)[];
 
 	/**
@@ -60,6 +61,7 @@ export interface Options {
 		 */
 		defineModel?: boolean;
 	};
+
 	template?: Partial<
 		Omit<
 			SFCTemplateCompileOptions,
@@ -76,6 +78,7 @@ export interface Options {
 			| "preprocessLang"
 		>
 	>;
+
 	style?: Partial<
 		Omit<
 			SFCStyleCompileOptions,
@@ -145,10 +148,15 @@ export interface Options {
 
 export interface ResolvedOptions extends Options {
 	compiler: typeof _compiler;
+
 	root: string;
+
 	sourceMap: boolean;
+
 	cssDevSourcemap: boolean;
+
 	devServer?: ViteDevServer;
+
 	devToolsEnabled?: boolean;
 }
 
@@ -156,6 +164,7 @@ export interface Api {
 	get options(): ResolvedOptions;
 
 	set options(value: ResolvedOptions);
+
 	version: string;
 }
 
@@ -202,9 +211,11 @@ export default function vuePlugin(rawOptions: Options = {}): Plugin<Api> {
 			if (options.value.compiler.invalidateTypeCache) {
 				options.value.compiler.invalidateTypeCache(ctx.file);
 			}
+
 			if (typeDepToSFCMap.has(ctx.file)) {
 				return handleTypeDepChange(typeDepToSFCMap.get(ctx.file)!, ctx);
 			}
+
 			if (filter.value(ctx.file)) {
 				return handleHotUpdate(
 					ctx,
@@ -301,6 +312,7 @@ export default function vuePlugin(rawOptions: Options = {}): Plugin<Api> {
 				if (query.src) {
 					return fs.readFileSync(filename, "utf-8");
 				}
+
 				const descriptor = getDescriptor(filename, options.value)!;
 
 				let block: SFCBlock | null | undefined;
@@ -315,6 +327,7 @@ export default function vuePlugin(rawOptions: Options = {}): Plugin<Api> {
 				} else if (query.index != null) {
 					block = descriptor.customBlocks[query.index];
 				}
+
 				if (block) {
 					return {
 						code: block.content,

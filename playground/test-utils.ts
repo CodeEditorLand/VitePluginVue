@@ -78,6 +78,7 @@ async function toEl(el: string | ElementHandle): Promise<ElementHandle> {
 	if (typeof el === "string") {
 		return await page.$(el);
 	}
+
 	return el;
 }
 
@@ -113,11 +114,13 @@ export function editFile(
 	runInBuild: boolean = false,
 ): void {
 	if (isBuild && !runInBuild) return;
+
 	filename = path.resolve(testDir, filename);
 
 	const content = fs.readFileSync(filename, "utf-8");
 
 	const modified = replacer(content);
+
 	fs.writeFileSync(filename, modified);
 }
 
@@ -150,8 +153,10 @@ export function findAssetFile(
 		if (e.code === "ENOENT") {
 			return "";
 		}
+
 		throw e;
 	}
+
 	const file = files.find((file) => {
 		return file.match(match);
 	});
@@ -210,8 +215,10 @@ export async function withRetry(
 
 			return;
 		} catch {}
+
 		await timeout(50);
 	}
+
 	await func();
 }
 
@@ -243,6 +250,7 @@ export async function untilBrowserLogAfter(
 	const callback = typeof arg3 === "boolean" ? arg4 : arg3;
 
 	const promise = untilBrowserLog(target, expectOrder);
+
 	await operation();
 
 	const logs = await promise;
@@ -250,6 +258,7 @@ export async function untilBrowserLogAfter(
 	if (callback) {
 		await callback(logs);
 	}
+
 	return logs;
 }
 
@@ -263,6 +272,7 @@ async function untilBrowserLog(
 
 	const promise = new Promise<void>((_resolve, _reject) => {
 		resolve = _resolve;
+
 		reject = _reject;
 	});
 
@@ -279,14 +289,17 @@ async function untilBrowserLog(
 		} else if (Array.isArray(target)) {
 			if (expectOrder) {
 				const remainingTargets = [...target];
+
 				processMsg = (text: string) => {
 					const nextTarget = remainingTargets.shift();
+
 					expect(text).toMatch(nextTarget);
 
 					return remainingTargets.length === 0;
 				};
 			} else {
 				const remainingMatchers = target.map(isMatch);
+
 				processMsg = (text: string) => {
 					const nextIndex = remainingMatchers.findIndex((matcher) =>
 						matcher(text),
@@ -295,6 +308,7 @@ async function untilBrowserLog(
 					if (nextIndex >= 0) {
 						remainingMatchers.splice(nextIndex, 1);
 					}
+
 					return remainingMatchers.length === 0;
 				};
 			}
@@ -305,6 +319,7 @@ async function untilBrowserLog(
 		const handleMsg = (msg: ConsoleMessage) => {
 			try {
 				const text = msg.text();
+
 				logs.push(text);
 
 				const done = processMsg(text);
@@ -337,9 +352,13 @@ export const formatSourcemapForSnapshot = (map: any): any => {
 	const root = normalizePath(testDir);
 
 	const m = { ...map };
+
 	delete m.file;
+
 	delete m.names;
+
 	delete m.sourceRoot;
+
 	m.sources = m.sources.map((source) => source.replace(root, "/root"));
 
 	return m;
@@ -352,6 +371,7 @@ export async function killProcess(
 	if (isWindows) {
 		try {
 			const { execaCommandSync } = await import("execa");
+
 			execaCommandSync(`taskkill /pid ${serverProcess.pid} /T /F`);
 		} catch (e) {
 			console.error("failed to taskkill:", e);

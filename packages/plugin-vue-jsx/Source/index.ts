@@ -24,6 +24,7 @@ const ssrRegisterHelperCode =
  */
 function ssrRegisterHelper(comp: ComponentOptions, filename: string) {
 	const setup = comp.setup;
+
 	comp.setup = (props, ctx) => {
 		// @ts-ignore
 		const ssrContext = useSSRContext();
@@ -75,8 +76,10 @@ function vueJsxPlugin(options: Options = {}): Plugin {
 
 		configResolved(config) {
 			needHmr = config.command === "serve" && !config.isProduction;
+
 			needSourceMap =
 				config.command === "serve" || !!config.build.sourcemap;
+
 			root = config.root;
 		},
 
@@ -124,6 +127,7 @@ function vueJsxPlugin(options: Options = {}): Plugin {
 										if (isDefineComponentCall(_path.node)) {
 											const callee = _path.node
 												.callee as Identifier;
+
 											callee.name = `/* @__PURE__ */ ${callee.name}`;
 										}
 									},
@@ -155,6 +159,7 @@ function vueJsxPlugin(options: Options = {}): Plugin {
 					local: string;
 
 					exported: string;
+
 					id: string;
 				}
 
@@ -229,6 +234,7 @@ function vueJsxPlugin(options: Options = {}): Plugin {
 							}
 						} else if (isDefineComponentCall(node.declaration)) {
 							hasDefault = true;
+
 							hotComponents.push({
 								local: "__default__",
 								exported: "default",
@@ -256,6 +262,7 @@ function vueJsxPlugin(options: Options = {}): Plugin {
 							code +=
 								`\n${local}.__hmrId = "${id}"` +
 								`\n__VUE_HMR_RUNTIME__.createRecord("${id}", ${local})`;
+
 							callbackCode += `\n__VUE_HMR_RUNTIME__.reload("${id}", __${exported})`;
 						}
 
@@ -264,6 +271,7 @@ function vueJsxPlugin(options: Options = {}): Plugin {
 							.join(",");
 
 						code += `\nimport.meta.hot.accept(({${newCompNames}}) => {${callbackCode}\n})`;
+
 						result.code = code;
 					}
 
@@ -279,6 +287,7 @@ function vueJsxPlugin(options: Options = {}): Plugin {
 						for (const { local } of hotComponents) {
 							ssrInjectCode += `\nssrRegisterHelper(${local}, __moduleId)`;
 						}
+
 						result.code += ssrInjectCode;
 					}
 				}
@@ -302,6 +311,7 @@ function parseComponentDecls(node: types.VariableDeclaration) {
 			names.push(decl.id.name);
 		}
 	}
+
 	return names;
 }
 
