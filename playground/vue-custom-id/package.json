@@ -1,21 +1,17 @@
 {
-  "name": "@vitejs/test-vue-sourcemap",
+  "name": "@vitejs/test-vue-custom-id",
   "private": true,
   "version": "0.0.0",
-  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "debug": "node --inspect-brk vite",
     "preview": "vite preview"
   },
-  "devDependencies": {
-    "@vitejs/plugin-vue": "workspace:*",
-    "less": "^4.2.1",
-    "postcss-nested": "^7.0.2",
-    "sass": "^1.81.0"
-  },
   "dependencies": {
     "vue": "catalog:"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "workspace:*"
   }
 }
