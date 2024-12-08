@@ -1,11 +1,14 @@
-import type { VueJSXPluginOptions } from "@vue/babel-plugin-jsx";
-import type { FilterPattern } from "vite";
+import type { VueJSXPluginOptions } from '@vue/babel-plugin-jsx'
+import type { FilterPattern } from 'vite'
 
 export interface FilterOptions {
-	include?: FilterPattern;
-
-	exclude?: FilterPattern;
+  include?: FilterPattern
+  exclude?: FilterPattern
 }
 
-export type Options = VueJSXPluginOptions &
-	FilterOptions & { babelPlugins?: any[] };
+export interface Options extends VueJSXPluginOptions, FilterOptions {
+  babelPlugins?: any[]
+  /** @default ['defineComponent'] */
+  defineComponentName?: string[]
+  tsPluginOptions?: any
+}
