@@ -1,4 +1,6 @@
 {
+	"dependencies": {},
+	"devDependencies": {},
 	"main": "index.js",
-	"name": "@vitejs/test-example-external-component"
+	"name": "@codeeditorland/test-example-external-component"
 }

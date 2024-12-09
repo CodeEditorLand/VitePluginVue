@@ -1,7 +1,7 @@
 {
 	"dependencies": {},
 	"devDependencies": {},
-	"name": "@vitejs/test-vue-custom-id",
+	"name": "@codeeditorland/test-vue-custom-id",
 	"scripts": {
 		"build": "vite build",
 		"debug": "node --inspect-brk vite",

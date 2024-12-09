@@ -1,9 +1,9 @@
 {
 	"dependencies": {},
 	"devDependencies": {
-		"@vitejs/plugin-vue-jsx": "workspace:*"
+		"@codeeditorland/plugin-vue-jsx": "0.0.1"
 	},
-	"name": "@vitejs/test-vue-jsx",
+	"name": "@codeeditorland/test-vue-jsx",
 	"scripts": {
 		"build": "vite build",
 		"debug": "node --inspect-brk vite",

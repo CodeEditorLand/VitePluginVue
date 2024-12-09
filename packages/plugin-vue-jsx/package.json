@@ -15,7 +15,7 @@
 	],
 	"main": "./dist/index.cjs",
 	"module": "./dist/index.mjs",
-	"name": "@vitejs/plugin-vue-jsx",
+	"name": "@codeeditorland/plugin-vue-jsx",
 	"scripts": {
 		"build": "unbuild && pnpm run patch-cjs",
 		"dev": "unbuild --stub",

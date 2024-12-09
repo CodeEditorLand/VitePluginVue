@@ -9,7 +9,7 @@
 		"sass": "^1.81.0",
 		"stylus": "^0.64.0"
 	},
-	"name": "@vitejs/test-vue",
+	"name": "@codeeditorland/test-vue",
 	"scripts": {
 		"build": "vite build",
 		"debug": "node --inspect-brk vite",

@@ -1,7 +1,7 @@
 {
 	"dependencies": {},
 	"devDependencies": {},
-	"name": "@vitejs/test-vue-lib",
+	"name": "@codeeditorland/test-vue-lib",
 	"scripts": {
 		"build-consumer": "vite build --config ./vite.config.consumer.ts",
 		"build-lib": "vite build --config ./vite.config.lib.ts",

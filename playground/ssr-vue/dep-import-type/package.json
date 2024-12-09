@@ -1,4 +1,6 @@
 {
+	"dependencies": {},
+	"devDependencies": {},
 	"main": "index.js",
-	"name": "@vitejs/test-dep-import-type"
+	"name": "@codeeditorland/test-dep-import-type"
 }
