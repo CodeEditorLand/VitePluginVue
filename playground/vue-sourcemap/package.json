@@ -1,15 +1,15 @@
 {
-	"dependencies": {},
-	"devDependencies": {
-		"less": "^4.2.1",
-		"postcss-nested": "^7.0.2",
-		"sass": "^1.81.0"
-	},
 	"name": "@codeeditorland/test-vue-sourcemap",
 	"scripts": {
 		"build": "vite build",
 		"debug": "node --inspect-brk vite",
 		"dev": "vite",
 		"preview": "vite preview"
+	},
+	"dependencies": {},
+	"devDependencies": {
+		"less": "^4.2.1",
+		"postcss-nested": "^7.0.2",
+		"sass": "^1.81.0"
 	}
 }

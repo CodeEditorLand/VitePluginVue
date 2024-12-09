@@ -1,6 +1,6 @@
 {
-	"dependencies": {},
-	"devDependencies": {},
+	"name": "@codeeditorland/test-example-external-component",
 	"main": "index.js",
-	"name": "@codeeditorland/test-example-external-component"
+	"dependencies": {},
+	"devDependencies": {}
 }

@@ -1,11 +1,11 @@
 {
-	"dependencies": {},
-	"devDependencies": {},
 	"name": "@codeeditorland/test-vue-custom-id",
 	"scripts": {
 		"build": "vite build",
 		"debug": "node --inspect-brk vite",
 		"dev": "vite",
 		"preview": "vite preview"
-	}
+	},
+	"dependencies": {},
+	"devDependencies": {}
 }

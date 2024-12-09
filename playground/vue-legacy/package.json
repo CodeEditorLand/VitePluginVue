@@ -1,13 +1,13 @@
 {
-	"dependencies": {},
-	"devDependencies": {
-		"@codeeditorland/plugin-legacy": "^6.0.0"
-	},
 	"name": "@codeeditorland/test-vue-legacy",
 	"scripts": {
 		"build": "vite build",
 		"debug": "node --inspect-brk vite",
 		"dev": "vite",
 		"preview": "vite preview"
+	},
+	"dependencies": {},
+	"devDependencies": {
+		"@codeeditorland/plugin-legacy": "0.0.1"
 	}
 }

@@ -1,14 +1,4 @@
 {
-	"dependencies": {
-		"@codeeditorland/test-example-external-component": "file:example-external-component",
-		"pinia": "^2.2.6"
-	},
-	"devDependencies": {
-		"@codeeditorland/plugin-vue-jsx": "0.0.1",
-		"@codeeditorland/test-dep-import-type": "link:dep-import-type",
-		"compression": "^1.7.5",
-		"serve-static": "^1.16.2"
-	},
 	"name": "@codeeditorland/test-ssr-vue",
 	"scripts": {
 		"build": "npm run build:client && npm run build:server",
@@ -20,5 +10,15 @@
 		"dev": "node server",
 		"generate": "vite build --ssrManifest .vite/ssr-manifest.json --outDir dist/static && npm run build:server && node prerender",
 		"serve": "NODE_ENV=production node server"
+	},
+	"dependencies": {
+		"@codeeditorland/test-example-external-component": "0.0.1",
+		"pinia": "^2.2.6"
+	},
+	"devDependencies": {
+		"@codeeditorland/plugin-vue-jsx": "0.0.1",
+		"@codeeditorland/test-dep-import-type": "0.0.1",
+		"compression": "^1.7.5",
+		"serve-static": "^1.16.2"
 	}
 }

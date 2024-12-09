@@ -1,6 +1,6 @@
 {
-	"dependencies": {},
-	"devDependencies": {},
+	"name": "@codeeditorland/test-dep-import-type",
 	"main": "index.js",
-	"name": "@codeeditorland/test-dep-import-type"
+	"dependencies": {},
+	"devDependencies": {}
 }
