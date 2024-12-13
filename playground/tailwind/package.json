@@ -7,9 +7,9 @@
 		"preview": "vite preview"
 	},
 	"dependencies": {
-		"autoprefixer": "^10.4.20"
+		"autoprefixer": "10.4.20"
 	},
 	"devDependencies": {
-		"@types/node": "^22.10.0"
+		"@types/node": "22.10.0"
 	}
 }
