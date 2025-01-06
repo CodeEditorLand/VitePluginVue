@@ -36,19 +36,19 @@
 		"@types/convert-source-map": "^2.0.3",
 		"@types/debug": "^4.1.12",
 		"@types/fs-extra": "^11.0.4",
-		"@types/node": "^22.10.1",
+		"@types/node": "^22.10.5",
 		"conventional-changelog-cli": "^5.0.0",
-		"eslint-plugin-import-x": "^4.5.0",
+		"eslint-plugin-import-x": "^4.6.1",
 		"eslint-plugin-regexp": "^2.7.0",
 		"execa": "^9.5.2",
 		"fs-extra": "^11.2.0",
-		"lint-staged": "^15.2.10",
-		"npm-run-all2": "^7.0.1",
+		"lint-staged": "^15.3.0",
+		"npm-run-all2": "^7.0.2",
 		"picocolors": "^1.1.1",
-		"playwright-chromium": "^1.49.0",
+		"playwright-chromium": "^1.49.1",
 		"simple-git-hooks": "^2.11.1",
 		"tsx": "^4.19.2",
-		"unbuild": "2.0.0"
+		"unbuild": "3.2.0"
 	},
 	"pnpm": {
 		"overrides": {
