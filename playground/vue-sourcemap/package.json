@@ -8,7 +8,7 @@
 	},
 	"dependencies": {},
 	"devDependencies": {
-		"less": "4.2.1",
+		"less": "4.2.2",
 		"postcss-nested": "7.0.2",
 		"sass": "1.83.4"
 	}
