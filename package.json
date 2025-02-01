@@ -36,7 +36,7 @@
 		"@types/convert-source-map": "2.0.3",
 		"@types/debug": "4.1.12",
 		"@types/fs-extra": "11.0.4",
-		"@types/node": "22.10.10",
+		"@types/node": "22.13.0",
 		"conventional-changelog-cli": "5.0.0",
 		"eslint-plugin-import-x": "4.6.1",
 		"eslint-plugin-regexp": "2.7.0",
@@ -45,7 +45,7 @@
 		"lint-staged": "15.4.3",
 		"npm-run-all2": "7.0.2",
 		"picocolors": "1.1.1",
-		"playwright-chromium": "1.50.0",
+		"playwright-chromium": "1.50.1",
 		"simple-git-hooks": "2.11.1",
 		"tsx": "4.19.2",
 		"unbuild": "3.3.1"
