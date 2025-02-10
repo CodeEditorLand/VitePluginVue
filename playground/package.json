@@ -2,7 +2,7 @@
 	"name": "@codeeditorlandjs/vite-playground",
 	"dependencies": {},
 	"devDependencies": {
-		"@types/node": "22.13.0",
+		"@types/node": "22.13.1",
 		"convert-source-map": "2.0.0",
 		"css-color-names": "1.0.1",
 		"kill-port": "2.0.1",
