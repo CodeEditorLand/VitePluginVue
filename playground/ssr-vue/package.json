@@ -13,12 +13,12 @@
 	},
 	"dependencies": {
 		"@codeeditorlandjs/test-example-external-component": "file:example-external-component",
-		"pinia": "2.3.1"
+		"pinia": "3.0.1"
 	},
 	"devDependencies": {
 		"@codeeditorlandjs/plugin-vue-jsx": "workspace:*",
 		"@codeeditorlandjs/test-dep-import-type": "link:dep-import-type",
-		"compression": "1.7.5",
+		"compression": "1.8.0",
 		"serve-static": "1.16.2"
 	}
 }
