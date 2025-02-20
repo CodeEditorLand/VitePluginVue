@@ -1,4 +1,11 @@
 {
+	"name": "@codeeditorlandjs/test-vue",
+	"scripts": {
+		"build": "vite build",
+		"debug": "node --inspect-brk vite",
+		"dev": "vite",
+		"preview": "vite preview"
+	},
 	"dependencies": {
 		"lodash-es": "4.17.21"
 	},
@@ -8,12 +15,5 @@
 		"pug": "3.0.3",
 		"sass": "1.85.0",
 		"stylus": "0.64.0"
-	},
-	"name": "@codeeditorlandjs/test-vue",
-	"scripts": {
-		"build": "vite build",
-		"debug": "node --inspect-brk vite",
-		"dev": "vite",
-		"preview": "vite preview"
 	}
 }
