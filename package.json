@@ -1,4 +1,34 @@
 {
+	"name": "@codeeditorlandjs/vite-plugin-vue-monorepo",
+	"scripts": {
+		"build": "pnpm -r --filter='./packages/*' run build",
+		"ci-publish": "tsx scripts/publishCI.ts",
+		"debug-build": "VITE_TEST_BUILD=1 VITE_PRESERVE_BUILD_ARTIFACTS=1 vitest run -c vitest.config.e2e.ts",
+		"debug-serve": "VITE_DEBUG_SERVE=1 vitest run -c vitest.config.e2e.ts",
+		"dev": "pnpm -r --parallel --filter='./packages/*' run dev",
+		"preinstall": "npx only-allow pnpm",
+		"release": "tsx scripts/release.ts",
+		"test-build": "VITE_TEST_BUILD=1 vitest run -c vitest.config.e2e.ts",
+		"test-build-without-plugin-commonjs": "VITE_TEST_WITHOUT_PLUGIN_COMMONJS=1 pnpm test-build",
+		"test-serve": "vitest run -c vitest.config.e2e.ts"
+	},
+	"simple-git-hooks": {
+		"pre-commit": "pnpm exec lint-staged --concurrent false"
+	},
+	"lint-staged": {
+		"*": [
+			"prettier --write --cache --ignore-unknown"
+		],
+		"packages/**/*.d.ts": [
+			"eslint --cache --fix"
+		],
+		"packages/*/{src,types}/**/*.ts": [
+			"eslint --cache --fix"
+		],
+		"playground/**/__tests__/**/*.ts": [
+			"eslint --cache --fix"
+		]
+	},
 	"dependencies": {},
 	"devDependencies": {
 		"@babel/types": "7.26.9",
@@ -20,39 +50,9 @@
 		"tsx": "4.19.2",
 		"unbuild": "3.3.1"
 	},
-	"lint-staged": {
-		"*": [
-			"prettier --write --cache --ignore-unknown"
-		],
-		"packages/**/*.d.ts": [
-			"eslint --cache --fix"
-		],
-		"packages/*/{src,types}/**/*.ts": [
-			"eslint --cache --fix"
-		],
-		"playground/**/__tests__/**/*.ts": [
-			"eslint --cache --fix"
-		]
-	},
-	"name": "@codeeditorlandjs/vite-plugin-vue-monorepo",
 	"pnpm": {
 		"overrides": {
 			"@vitejs/plugin-vue": "workspace:*"
 		}
-	},
-	"scripts": {
-		"build": "pnpm -r --filter='./packages/*' run build",
-		"ci-publish": "tsx scripts/publishCI.ts",
-		"debug-build": "VITE_TEST_BUILD=1 VITE_PRESERVE_BUILD_ARTIFACTS=1 vitest run -c vitest.config.e2e.ts",
-		"debug-serve": "VITE_DEBUG_SERVE=1 vitest run -c vitest.config.e2e.ts",
-		"dev": "pnpm -r --parallel --filter='./packages/*' run dev",
-		"preinstall": "npx only-allow pnpm",
-		"release": "tsx scripts/release.ts",
-		"test-build": "VITE_TEST_BUILD=1 vitest run -c vitest.config.e2e.ts",
-		"test-build-without-plugin-commonjs": "VITE_TEST_WITHOUT_PLUGIN_COMMONJS=1 pnpm test-build",
-		"test-serve": "vitest run -c vitest.config.e2e.ts"
-	},
-	"simple-git-hooks": {
-		"pre-commit": "pnpm exec lint-staged --concurrent false"
 	}
 }
