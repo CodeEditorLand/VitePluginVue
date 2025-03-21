@@ -20,7 +20,7 @@
 	},
 	"dependencies": {
 		"@babel/plugin-transform-typescript": "7.26.8",
-		"@vue/babel-plugin-jsx": "1.2.5"
+		"@vue/babel-plugin-jsx": "1.4.0"
 	},
 	"devDependencies": {}
 }
