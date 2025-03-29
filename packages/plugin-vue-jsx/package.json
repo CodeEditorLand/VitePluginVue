@@ -19,7 +19,7 @@
 		"prepublishOnly": "npm run build"
 	},
 	"dependencies": {
-		"@babel/plugin-transform-typescript": "7.26.8",
+		"@babel/plugin-transform-typescript": "7.27.0",
 		"@vue/babel-plugin-jsx": "1.4.0"
 	},
 	"devDependencies": {}
