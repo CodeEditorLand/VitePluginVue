@@ -1,5 +1,27 @@
 {
 	"name": "@codeeditorlandjs/vite-plugin-vue-monorepo",
+	"version": "0.0.1",
+	"private": false,
+	"keywords": [
+		"codeeditorland",
+		"land",
+		"playform"
+	],
+	"homepage": "HTTPS://GitHub.Com/CodeEditorLand/VitePluginVue#readme",
+	"bugs": {
+		"url": "HTTPS://GitHub.Com/CodeEditorLand/VitePluginVue/issues"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+HTTPS://github.com/CodeEditorLand/VitePluginVue.git"
+	},
+	"license": "SEE LICENSE IN LICENSE",
+	"author": {
+		"name": "Source 🖋️ Open 👐🏻",
+		"email": "Source/Open@Editor.Land",
+		"url": "HTTPS://Editor.Land"
+	},
+	"type": "module",
 	"scripts": {
 		"build": "pnpm -r --filter='./packages/*' run build",
 		"ci-publish": "tsx scripts/publishCI.ts",
@@ -7,6 +29,7 @@
 		"debug-serve": "VITE_DEBUG_SERVE=1 vitest run -c vitest.config.e2e.ts",
 		"dev": "pnpm -r --parallel --filter='./packages/*' run dev",
 		"preinstall": "npx only-allow pnpm",
+		"prepublishOnly": "Build 'Source/**/*.ts'",
 		"release": "tsx scripts/release.ts",
 		"test-build": "VITE_TEST_BUILD=1 vitest run -c vitest.config.e2e.ts",
 		"test-build-without-plugin-commonjs": "VITE_TEST_WITHOUT_PLUGIN_COMMONJS=1 pnpm test-build",
@@ -33,6 +56,7 @@
 	"devDependencies": {
 		"@babel/types": "7.27.0",
 		"@codeeditorlandjs/release-scripts": "1.3.2",
+		"@playform/build": "0.2.1",
 		"@types/convert-source-map": "2.0.3",
 		"@types/debug": "4.1.12",
 		"@types/fs-extra": "11.0.4",
@@ -49,6 +73,9 @@
 		"simple-git-hooks": "2.12.1",
 		"tsx": "4.19.3",
 		"unbuild": "3.5.0"
+	},
+	"publishConfig": {
+		"access": "public"
 	},
 	"pnpm": {
 		"overrides": {

@@ -1,21 +1,33 @@
 {
-	"include": ["."],
-	"exclude": ["**/dist/**"],
 	"compilerOptions": {
-		"target": "ES2020",
-		"module": "ESNext",
-		"outDir": "dist",
-		"baseUrl": ".",
 		"allowJs": true,
+		"baseUrl": "./",
 		"esModuleInterop": true,
-		"resolveJsonModule": true,
-		"moduleResolution": "Node",
-		"skipLibCheck": true,
-		"noUnusedLocals": true,
 		"jsx": "preserve",
-		"types": ["vite/client", "node"],
+		"module": "ESNext",
+		"moduleResolution": "Node",
+		"noUnusedLocals": true,
+		"outDir": "Target",
 		"paths": {
-			"~utils": ["./test-utils.ts"]
-		}
-	}
+			"~utils": [
+				"./test-utils.ts"
+			]
+		},
+		"resolveJsonModule": true,
+		"rootDir": "src",
+		"skipLibCheck": true,
+		"target": "ES2020",
+		"types": [
+			"vite/client",
+			"node"
+		]
+	},
+	"exclude": [
+		"**/dist/**"
+	],
+	"extends": "@playform/build/tsconfig",
+	"include": [
+		".",
+		"src"
+	]
 }

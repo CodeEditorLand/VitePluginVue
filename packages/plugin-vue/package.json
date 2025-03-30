@@ -1,5 +1,27 @@
 {
 	"name": "@codeeditorlandjs/plugin-vue",
+	"version": "0.0.1",
+	"private": false,
+	"keywords": [
+		"codeeditorland",
+		"land",
+		"playform"
+	],
+	"homepage": "HTTPS://GitHub.Com/CodeEditorLand/VitePluginVue#readme",
+	"bugs": {
+		"url": "HTTPS://GitHub.Com/CodeEditorLand/VitePluginVue/issues"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+HTTPS://github.com/CodeEditorLand/VitePluginVue.git"
+	},
+	"license": "SEE LICENSE IN LICENSE",
+	"author": {
+		"name": "Source 🖋️ Open 👐🏻",
+		"email": "Source/Open@Editor.Land",
+		"url": "HTTPS://Editor.Land"
+	},
+	"type": "module",
 	"exports": {
 		".": {
 			"import": "./dist/index.mjs",
@@ -16,14 +38,18 @@
 		"build": "unbuild && pnpm run patch-cjs",
 		"dev": "unbuild --stub",
 		"patch-cjs": "tsx ../../scripts/patchCJS.ts",
-		"prepublishOnly": "npm run build"
+		"prepublishOnly": "Build 'Source/**/*.ts'"
 	},
 	"dependencies": {},
 	"devDependencies": {
 		"@jridgewell/gen-mapping": "0.3.8",
 		"@jridgewell/trace-mapping": "0.3.25",
+		"@playform/build": "0.2.1",
 		"debug": "4.4.0",
 		"slash": "5.1.0",
 		"source-map-js": "1.2.1"
+	},
+	"publishConfig": {
+		"access": "public"
 	}
 }
