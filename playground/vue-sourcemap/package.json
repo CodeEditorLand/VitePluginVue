@@ -31,10 +31,10 @@
 	},
 	"dependencies": {},
 	"devDependencies": {
-		"@playform/build": "0.2.1",
+		"@playform/build": "0.2.2",
 		"less": "4.2.2",
 		"postcss-nested": "7.0.2",
-		"sass": "1.86.2"
+		"sass": "1.86.3"
 	},
 	"publishConfig": {
 		"access": "public"

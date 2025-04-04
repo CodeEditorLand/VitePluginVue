@@ -33,7 +33,7 @@
 		"autoprefixer": "10.4.21"
 	},
 	"devDependencies": {
-		"@playform/build": "0.2.1",
+		"@playform/build": "0.2.2",
 		"@types/node": "22.14.0"
 	},
 	"publishConfig": {
