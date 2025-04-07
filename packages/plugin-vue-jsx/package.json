@@ -45,7 +45,7 @@
 		"@vue/babel-plugin-jsx": "1.4.0"
 	},
 	"devDependencies": {
-		"@playform/build": "0.2.2"
+		"@playform/build": "0.2.3"
 	},
 	"publishConfig": {
 		"access": "public"

@@ -44,7 +44,7 @@
 	"devDependencies": {
 		"@jridgewell/gen-mapping": "0.3.8",
 		"@jridgewell/trace-mapping": "0.3.25",
-		"@playform/build": "0.2.2",
+		"@playform/build": "0.2.3",
 		"debug": "4.4.0",
 		"slash": "5.1.0",
 		"source-map-js": "1.2.1"

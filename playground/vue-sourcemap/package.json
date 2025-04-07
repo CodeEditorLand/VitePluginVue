@@ -31,8 +31,8 @@
 	},
 	"dependencies": {},
 	"devDependencies": {
-		"@playform/build": "0.2.2",
-		"less": "4.2.2",
+		"@playform/build": "0.2.3",
+		"less": "4.3.0",
 		"postcss-nested": "7.0.2",
 		"sass": "1.86.3"
 	},

@@ -33,9 +33,9 @@
 		"lodash-es": "4.17.21"
 	},
 	"devDependencies": {
-		"@playform/build": "0.2.2",
+		"@playform/build": "0.2.3",
 		"js-yaml": "4.1.0",
-		"less": "4.2.2",
+		"less": "4.3.0",
 		"pug": "3.0.3",
 		"sass": "1.86.3",
 		"stylus": "0.64.0"
