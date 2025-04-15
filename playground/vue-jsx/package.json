@@ -1,27 +1,5 @@
 {
 	"name": "@codeeditorland/test-vue-jsx",
-	"version": "0.0.1",
-	"private": false,
-	"keywords": [
-		"codeeditorland",
-		"land",
-		"playform"
-	],
-	"homepage": "HTTPS://GitHub.Com/CodeEditorLand/VitePluginVue#readme",
-	"bugs": {
-		"url": "HTTPS://GitHub.Com/CodeEditorLand/VitePluginVue/issues"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+HTTPS://github.com/CodeEditorLand/VitePluginVue.git"
-	},
-	"license": "SEE LICENSE IN LICENSE",
-	"author": {
-		"name": "Source 🖋️ Open 👐🏻",
-		"email": "Source/Open@Editor.Land",
-		"url": "HTTPS://Editor.Land"
-	},
-	"type": "module",
 	"scripts": {
 		"build": "vite build",
 		"debug": "node --inspect-brk vite",
@@ -33,8 +11,5 @@
 	"devDependencies": {
 		"@codeeditorland/plugin-vue-jsx": "0.0.1",
 		"@playform/build": "0.2.3"
-	},
-	"publishConfig": {
-		"access": "public"
 	}
 }
