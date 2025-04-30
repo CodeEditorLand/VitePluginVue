@@ -1,31 +1,51 @@
 {
-  "name": "@vitejs/test-ssr-vue",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
-  "scripts": {
-    "dev": "node server",
-    "build": "npm run build:client && npm run build:server",
-    "build:noExternal": "npm run build:client && npm run build:server:noExternal",
-    "build:client": "vite build --ssrManifest .vite/ssr-manifest.json --outDir dist/client",
-    "build:server": "vite build --ssr src/entry-server.js --outDir dist/server",
-    "build:server:noExternal": "vite build --config vite.config.noexternal.js --ssr src/entry-server.js --outDir dist/server",
-    "generate": "vite build --ssrManifest .vite/ssr-manifest.json --outDir dist/static && npm run build:server && node prerender",
-    "serve": "NODE_ENV=production node server",
-    "debug": "node --inspect-brk server"
-  },
-  "dependencies": {
-    "@vitejs/test-example-external-component": "file:example-external-component",
-    "pinia": "3.0.2",
-    "vue": "catalog:",
-    "vue-router": "catalog:"
-  },
-  "devDependencies": {
-    "@vitejs/plugin-vue": "workspace:*",
-    "@vitejs/plugin-vue-jsx": "workspace:*",
-    "@vitejs/test-dep-import-type": "link:dep-import-type",
-    "compression": "1.8.0",
-    "express": "5.1.0",
-    "serve-static": "2.2.0"
-  }
+	"name": "@codeeditorlandjs/test-ssr-vue",
+	"version": "0.0.1",
+	"private": false,
+	"keywords": [
+		"codeeditorland",
+		"land",
+		"playform"
+	],
+	"homepage": "HTTPS://GitHub.Com/CodeEditorLand/VitePluginVue#readme",
+	"bugs": {
+		"url": "HTTPS://GitHub.Com/CodeEditorLand/VitePluginVue/issues"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+HTTPS://github.com/CodeEditorLand/VitePluginVue.git"
+	},
+	"license": "SEE LICENSE IN LICENSE",
+	"author": {
+		"name": "Source 🖋️ Open 👐🏻",
+		"email": "Source/Open@Editor.Land",
+		"url": "HTTPS://Editor.Land"
+	},
+	"type": "module",
+	"scripts": {
+		"build": "npm run build:client && npm run build:server",
+		"build:client": "vite build --ssrManifest .vite/ssr-manifest.json --outDir dist/client",
+		"build:noExternal": "npm run build:client && npm run build:server:noExternal",
+		"build:server": "vite build --ssr src/entry-server.js --outDir dist/server",
+		"build:server:noExternal": "vite build --config vite.config.noexternal.js --ssr src/entry-server.js --outDir dist/server",
+		"debug": "node --inspect-brk server",
+		"dev": "node server",
+		"generate": "vite build --ssrManifest .vite/ssr-manifest.json --outDir dist/static && npm run build:server && node prerender",
+		"prepublishOnly": "Build 'Source/**/*.ts'",
+		"serve": "NODE_ENV=production node server"
+	},
+	"dependencies": {
+		"@codeeditorlandjs/test-example-external-component": "file:example-external-component",
+		"pinia": "3.0.2"
+	},
+	"devDependencies": {
+		"@codeeditorlandjs/plugin-vue-jsx": "workspace:*",
+		"@codeeditorlandjs/test-dep-import-type": "link:dep-import-type",
+		"@playform/build": "0.2.3",
+		"compression": "1.8.0",
+		"serve-static": "2.2.0"
+	},
+	"publishConfig": {
+		"access": "public"
+	}
 }
