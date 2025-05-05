@@ -1,23 +1,14 @@
 {
-	"$schema": "https://json.schemastore.org/tsconfig",
-	"compilerOptions": {
-		"baseUrl": "./",
-		"esModuleInterop": true,
-		"forceConsistentCasingInFileNames": true,
-		"module": "ES2020",
-		"moduleResolution": "Node",
-		"noUnusedLocals": true,
-		"outDir": "Target",
-		"rootDir": "src",
-		"skipLibCheck": true,
-		"strict": true,
-		"target": "ES2020"
-	},
-	"extends": "@playform/build/tsconfig",
-	"include": [
-		".",
-		"src",
-		"src",
-		"src"
-	]
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "include": ["."],
+  "compilerOptions": {
+    "module": "ES2020",
+    "target": "ES2020",
+    "moduleResolution": "Node",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "noUnusedLocals": true,
+    "forceConsistentCasingInFileNames": true
+  }
 }

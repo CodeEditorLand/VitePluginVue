@@ -1,21 +1,21 @@
-import vuePlugin from "@vitejs/plugin-vue";
-import { defineConfig } from "vite";
+import { defineConfig } from 'vite'
+import vuePlugin from '@vitejs/plugin-vue'
 
 export default defineConfig({
-	plugins: [
-		vuePlugin({
-			features: {
-				componentIdGenerator: (filename) => {
-					return filename
-						.replace(/\.\w+$/, "")
-						.replace(/[^a-z0-9]/gi, "-")
-						.toLowerCase();
-				},
-			},
-		}),
-	],
-	build: {
-		// to make tests faster
-		minify: false,
-	},
-});
+  plugins: [
+    vuePlugin({
+      features: {
+        componentIdGenerator: (filename) => {
+          return filename
+            .replace(/\.\w+$/, '')
+            .replace(/[^a-z0-9]/gi, '-')
+            .toLowerCase()
+        },
+      },
+    }),
+  ],
+  build: {
+    // to make tests faster
+    minify: false,
+  },
+})

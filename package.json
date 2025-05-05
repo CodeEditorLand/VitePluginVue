@@ -1,85 +1,92 @@
 {
-	"name": "@codeeditorlandjs/vite-plugin-vue-monorepo",
-	"version": "0.0.1",
-	"private": false,
-	"keywords": [
-		"codeeditorland",
-		"land",
-		"playform"
-	],
-	"homepage": "HTTPS://GitHub.Com/CodeEditorLand/VitePluginVue#readme",
-	"bugs": {
-		"url": "HTTPS://GitHub.Com/CodeEditorLand/VitePluginVue/issues"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+HTTPS://github.com/CodeEditorLand/VitePluginVue.git"
-	},
-	"license": "SEE LICENSE IN LICENSE",
-	"author": {
-		"name": "Source 🖋️ Open 👐🏻",
-		"email": "Source/Open@Editor.Land",
-		"url": "HTTPS://Editor.Land"
-	},
-	"type": "module",
-	"scripts": {
-		"build": "pnpm -r --filter='./packages/*' run build",
-		"ci-publish": "tsx scripts/publishCI.ts",
-		"debug-build": "VITE_TEST_BUILD=1 VITE_PRESERVE_BUILD_ARTIFACTS=1 vitest run -c vitest.config.e2e.ts",
-		"debug-serve": "VITE_DEBUG_SERVE=1 vitest run -c vitest.config.e2e.ts",
-		"dev": "pnpm -r --parallel --filter='./packages/*' run dev",
-		"preinstall": "npx only-allow pnpm",
-		"prepublishOnly": "Build 'Source/**/*.ts'",
-		"release": "tsx scripts/release.ts",
-		"test-build": "VITE_TEST_BUILD=1 vitest run -c vitest.config.e2e.ts",
-		"test-build-without-plugin-commonjs": "VITE_TEST_WITHOUT_PLUGIN_COMMONJS=1 pnpm test-build",
-		"test-serve": "vitest run -c vitest.config.e2e.ts"
-	},
-	"simple-git-hooks": {
-		"pre-commit": "pnpm exec lint-staged --concurrent false"
-	},
-	"lint-staged": {
-		"*": [
-			"prettier --write --cache --ignore-unknown"
-		],
-		"packages/**/*.d.ts": [
-			"eslint --cache --fix"
-		],
-		"packages/*/{src,types}/**/*.ts": [
-			"eslint --cache --fix"
-		],
-		"playground/**/__tests__/**/*.ts": [
-			"eslint --cache --fix"
-		]
-	},
-	"dependencies": {},
-	"devDependencies": {
-		"@babel/types": "7.27.1",
-		"@codeeditorlandjs/release-scripts": "1.3.2",
-		"@playform/build": "0.2.3",
-		"@types/convert-source-map": "2.0.3",
-		"@types/debug": "4.1.12",
-		"@types/fs-extra": "11.0.4",
-		"@types/node": "22.15.3",
-		"conventional-changelog-cli": "5.0.0",
-		"eslint-plugin-import-x": "4.11.0",
-		"eslint-plugin-regexp": "2.7.0",
-		"execa": "9.5.2",
-		"fs-extra": "11.3.0",
-		"lint-staged": "15.5.1",
-		"npm-run-all2": "7.0.2",
-		"picocolors": "1.1.1",
-		"playwright-chromium": "1.52.0",
-		"simple-git-hooks": "2.13.0",
-		"tsx": "4.19.4",
-		"unbuild": "3.5.0"
-	},
-	"publishConfig": {
-		"access": "public"
-	},
-	"pnpm": {
-		"overrides": {
-			"@vitejs/plugin-vue": "workspace:*"
-		}
-	}
+  "name": "@vitejs/vite-plugin-vue-monorepo",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": "^18.0.0 || >=20.0.0"
+  },
+  "homepage": "https://github.com/vitejs/vite-plugin-vue/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vitejs/vite-plugin-vue.git"
+  },
+  "keywords": [
+    "frontend",
+    "hmr",
+    "dev-server",
+    "build-tool",
+    "vite",
+    "vue"
+  ],
+  "scripts": {
+    "preinstall": "npx only-allow pnpm",
+    "postinstall": "simple-git-hooks",
+    "format": "prettier --write --cache .",
+    "lint": "eslint --cache .",
+    "typecheck": "tsc -p scripts --noEmit && tsc -p playground --noEmit",
+    "test": "run-s test-serve test-build",
+    "test-serve": "vitest run -c vitest.config.e2e.ts",
+    "test-build": "VITE_TEST_BUILD=1 vitest run -c vitest.config.e2e.ts",
+    "test-build-without-plugin-commonjs": "VITE_TEST_WITHOUT_PLUGIN_COMMONJS=1 pnpm test-build",
+    "debug-serve": "VITE_DEBUG_SERVE=1 vitest run -c vitest.config.e2e.ts",
+    "debug-build": "VITE_TEST_BUILD=1 VITE_PRESERVE_BUILD_ARTIFACTS=1 vitest run -c vitest.config.e2e.ts",
+    "build": "pnpm -r --filter='./packages/*' run build",
+    "dev": "pnpm -r --parallel --filter='./packages/*' run dev",
+    "release": "tsx scripts/release.ts",
+    "ci-publish": "tsx scripts/publishCI.ts"
+  },
+  "devDependencies": {
+    "@babel/types": "^7.26.3",
+    "@eslint/js": "^9.16.0",
+    "@types/babel__core": "^7.20.5",
+    "@types/convert-source-map": "^2.0.3",
+    "@types/debug": "^4.1.12",
+    "@types/fs-extra": "^11.0.4",
+    "@types/node": "^22.10.1",
+    "@vitejs/release-scripts": "^1.3.2",
+    "conventional-changelog-cli": "^5.0.0",
+    "eslint": "^9.16.0",
+    "eslint-plugin-import-x": "^4.5.0",
+    "eslint-plugin-n": "^17.14.0",
+    "eslint-plugin-regexp": "^2.7.0",
+    "execa": "^9.5.2",
+    "fs-extra": "^11.2.0",
+    "lint-staged": "^15.2.10",
+    "npm-run-all2": "^7.0.1",
+    "picocolors": "^1.1.1",
+    "playwright-chromium": "^1.49.0",
+    "prettier": "3.4.2",
+    "rollup": "^4.28.1",
+    "simple-git-hooks": "^2.11.1",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2",
+    "typescript-eslint": "^8.18.0",
+    "unbuild": "2.0.0",
+    "vite": "catalog:",
+    "vitest": "^2.1.8",
+    "vue": "catalog:"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "pnpm exec lint-staged --concurrent false"
+  },
+  "lint-staged": {
+    "*": [
+      "prettier --write --cache --ignore-unknown"
+    ],
+    "packages/*/{src,types}/**/*.ts": [
+      "eslint --cache --fix"
+    ],
+    "packages/**/*.d.ts": [
+      "eslint --cache --fix"
+    ],
+    "playground/**/__tests__/**/*.ts": [
+      "eslint --cache --fix"
+    ]
+  },
+  "packageManager": "pnpm@9.15.0",
+  "pnpm": {
+    "overrides": {
+      "@vitejs/plugin-vue": "workspace:*"
+    }
+  }
 }

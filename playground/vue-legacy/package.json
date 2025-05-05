@@ -1,40 +1,19 @@
 {
-	"name": "@codeeditorland/test-vue-legacy",
-	"version": "0.0.1",
-	"private": false,
-	"keywords": [
-		"codeeditorland",
-		"land",
-		"playform"
-	],
-	"homepage": "HTTPS://GitHub.Com/CodeEditorLand/VitePluginVue#readme",
-	"bugs": {
-		"url": "HTTPS://GitHub.Com/CodeEditorLand/VitePluginVue/issues"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+HTTPS://github.com/CodeEditorLand/VitePluginVue.git"
-	},
-	"license": "SEE LICENSE IN LICENSE",
-	"author": {
-		"name": "Source 🖋️ Open 👐🏻",
-		"email": "Source/Open@Editor.Land",
-		"url": "HTTPS://Editor.Land"
-	},
-	"type": "module",
-	"scripts": {
-		"build": "vite build",
-		"debug": "node --inspect-brk vite",
-		"dev": "vite",
-		"prepublishOnly": "Build 'Source/**/*.ts'",
-		"preview": "vite preview"
-	},
-	"dependencies": {},
-	"devDependencies": {
-		"@codeeditorland/plugin-legacy": "0.0.1",
-		"@playform/build": "0.2.3"
-	},
-	"publishConfig": {
-		"access": "public"
-	}
+  "name": "@vitejs/test-vue-legacy",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "debug": "node --inspect-brk vite",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "vue": "catalog:"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "workspace:*",
+    "@vitejs/plugin-legacy": "^6.0.0"
+  }
 }
