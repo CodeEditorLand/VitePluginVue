@@ -35,14 +35,14 @@
   },
   "homepage": "https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue#readme",
   "peerDependencies": {
-    "vite": "^5.0.0 || ^6.0.0",
-    "vue": "^3.2.25"
+    "vite": "^6.3.5",
+    "vue": "^3.5.16"
   },
   "devDependencies": {
     "@jridgewell/gen-mapping": "^0.3.8",
     "@jridgewell/trace-mapping": "^0.3.25",
-    "debug": "^4.4.0",
-    "rollup": "^4.40.2",
+    "debug": "^4.4.1",
+    "rollup": "^4.42.0",
     "slash": "^5.1.0",
     "source-map-js": "^1.2.1",
     "vite": "catalog:",

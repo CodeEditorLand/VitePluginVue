@@ -11,12 +11,12 @@
   },
   "dependencies": {
     "autoprefixer": "^10.4.21",
-    "tailwindcss": "^3.4.17",
+    "tailwindcss": "3.4.17",
     "vue": "catalog:"
   },
   "devDependencies": {
-    "@types/node": "^22.15.17",
-    "@vitejs/plugin-vue": "workspace:*",
+    "@types/node": "^22.15.30",
+    "@vitejs/plugin-vue": "5.2.4",
     "ts-node": "^10.9.2"
   }
 }

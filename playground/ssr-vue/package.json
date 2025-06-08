@@ -16,13 +16,13 @@
   },
   "dependencies": {
     "@vitejs/test-example-external-component": "file:example-external-component",
-    "pinia": "^3.0.2",
+    "pinia": "^3.0.3",
     "vue": "catalog:",
     "vue-router": "catalog:"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "workspace:*",
-    "@vitejs/plugin-vue-jsx": "workspace:*",
+    "@vitejs/plugin-vue": "5.2.4",
+    "@vitejs/plugin-vue-jsx": "4.2.0",
     "@vitejs/test-dep-import-type": "link:dep-import-type",
     "compression": "^1.8.0",
     "express": "^5.1.0",
